@@ -54,7 +54,7 @@ export const response = {
                 "abdominalOrPelvicSurgeries": null,
                 "alcoholUsage": "NEVER",
                 "allergies": true,
-                "allergiesNote": "Peanuts",
+                "allergiesNote": "Aspirin",
                 "averageMenstrualCycle": "VARIES",
                 "bloating": false,
                 "bloodClots": null,

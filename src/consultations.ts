@@ -458,7 +458,7 @@ const medicalKeysToQuestions = {
     },
     weightGain: {
       question: 'Do you experience any of the following?',
-      answerChoices: ['Weight choices'],
+      answerChoices: ['Weight gain'],
     },
     coldSoresFrequency: {
       question: 'How often do you have cold sore outbreaks?',

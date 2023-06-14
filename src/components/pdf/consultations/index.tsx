@@ -1,8 +1,28 @@
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import moment from "moment";
 import BirthControlQuestions from "./BirthControlQuestions";
+import FertilityQuestions from "./Fertility";
 import GeneralQuestions from "./GeneralQuestions";
 import HerpesAntiviralQuestions from "./HerpesAntiviral";
+
+// export enum Frequency {
+//   NEVER,
+//   FEW_TIMES_A_YEAR,
+//   FEW_TIMES_A_MONTH,
+//   FEW_TIMES_A_WEEK,
+//   FEW_TIMES_A_DAY,
+//   DAILY,
+// }
+
+// export enum MenstrualCycleDetail {
+//   BLEED_LONGER_7_DAYS,
+//   BLEED_LESS_2_DAYS,
+//   CHANGE_TAMPON_EVERY_HOUR,
+//   CYCLE_SHORTER_21_DAYS,
+//   HEAVY_BLEEDING,
+//   PASS_BLOOD_CLOTS,
+//   MID_CYCLE_BLEEDING,
+// }
 
 interface ConsultationsType {
   createdAt: string;
@@ -93,7 +113,7 @@ interface ConsultationsType {
   tobaccoNote: string | null;
   tobaccoUsage: string | null;
   usingHormonalBirthControl: boolean | null;
-  uterinePolyps: null;
+  uterinePolyps: boolean | null;
   vaginalDrynessOrPainWithSex: boolean | null;
   weight: string | null;
   weightGain: boolean | null;
@@ -174,7 +194,37 @@ const Consultations = ({
                 c.recentVaricellaOrZosterVaccination
               }
             />
-            <Text style={styles.subHeader}>Fertility</Text>
+            <FertilityQuestions
+              abdominalOrPelvicSurgeries={c.abdominalOrPelvicSurgeries}
+              averageMenstrualCycle={c.averageMenstrualCycle}
+              endometriosis={c.endometriosis}
+              excessHairGrowth={c.excessHairGrowth}
+              exerciseFrequency={c.exerciseFrequency}
+              fibroids={c.fibroids}
+              hairLoss={c.hairLoss}
+              highBloodPressure={c.highBloodPressure}
+              highBloodPressureNote={c.highBloodPressureNote}
+              highProlactinLevel={c.highProlactinLevel}
+              menstrualCycleDetails={c.menstrualCycleDetails}
+              monthlyMenstrualCycles={c.monthlyMenstrualCycles}
+              ovarianCysts={c.ovarianCysts}
+              painBowelMovements={c.painBowelMovements}
+              painDeepPenetrativeSex={c.painDeepPenetrativeSex}
+              painPelvic={c.painPelvic}
+              patchesOfThickenedDarkenedSkin={c.patchesOfThickenedDarkenedSkin}
+              polycysticOvarianSyndrome={c.polycysticOvarianSyndrome}
+              rheumatologicOrAutoimmuneDisorder={
+                c.rheumatologicOrAutoimmuneDisorder
+              }
+              severeAcne={c.severeAcne}
+              severeMenstrualCramping={c.severeMenstrualCramping}
+              sexuallyTransmittedInfection={c.sexuallyTransmittedInfection}
+              supplements={c.supplements}
+              tobaccoUsage={c.tobaccoUsage}
+              thyroidDisorder={c.thyroidDisorder}
+              uterinePolyps={c.uterinePolyps}
+              weightGain={c.weightGain}
+            />
             <Text style={styles.subHeader}>Perimenopause</Text>
           </View>
         );
