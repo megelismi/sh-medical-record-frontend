@@ -16,7 +16,6 @@ const Insurance = () => (
 const styles = StyleSheet.create({
   insurancePolicy: {
     fontFamily: "Red Hat Mono",
-    margin: "32px 0",
     fontSize: "12px",
     lineHeight: "1.5",
   },

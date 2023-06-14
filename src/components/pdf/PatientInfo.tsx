@@ -17,7 +17,6 @@ const PatientInfo = () => {
 const styles = StyleSheet.create({
   patientInfo: {
     fontFamily: "Red Hat Mono",
-    margin: "32px 0",
     fontSize: "12px",
     lineHeight: "1.5",
   },

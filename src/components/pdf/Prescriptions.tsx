@@ -60,7 +60,6 @@ const Prescriptions = () => {
 const styles = StyleSheet.create({
   bold: { fontWeight: "bold" },
   prescriptions: {
-    margin: "32px 0",
     fontFamily: "Red Hat Mono",
     fontSize: "12px",
     lineHeight: "1.5",

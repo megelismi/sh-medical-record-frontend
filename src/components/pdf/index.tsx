@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    paddingBottom: "24px",
   },
   pageHeader: {
     textTransform: "uppercase",
@@ -76,11 +77,14 @@ const styles = StyleSheet.create({
     color: "grey",
   },
   subHeader: { fontWeight: "bold", margin: "10px 0" },
+  page: {
+    padding: "24px 12px 56px 12px",
+  },
 });
 
 const MyDoc = () => (
   <Document>
-    <Page size="A4">
+    <Page style={styles.page} size="A4">
       <View style={styles.section}>
         <PageHeader />
         <PatientInfo />
@@ -91,7 +95,7 @@ const MyDoc = () => (
         fixed
       />
     </Page>
-    <Page break>
+    <Page style={styles.page} size="A4" break>
       <View style={styles.section}>
         <PageHeader />
         <Prescriptions />
@@ -102,7 +106,7 @@ const MyDoc = () => (
         fixed
       />
     </Page>
-    <Page break>
+    <Page style={styles.page} size="A4" break>
       <View style={styles.section}>
         <PageHeader />
         <Insurance />
@@ -113,7 +117,7 @@ const MyDoc = () => (
         fixed
       />
     </Page>
-    <Page break>
+    <Page style={styles.page} size="A4" break>
       <View style={styles.section}>
         <PageHeader />
         <Consultations consultations={response.patient.consultations} />
@@ -128,7 +132,7 @@ const MyDoc = () => (
 );
 
 const PageHeader = () => (
-  <View style={styles.logoContainer}>
+  <View style={styles.logoContainer} fixed>
     <Image style={styles.logo} src={SHLogo} />
   </View>
 );

@@ -127,7 +127,7 @@ const GeneralQuestions = ({
       ) : null}
       {height ? (
         <ConsultationRow
-          question={"What is your height"}
+          question={"What is your height?"}
           answer={`${height} in`}
         />
       ) : null}

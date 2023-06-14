@@ -1,5 +1,6 @@
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import moment from "moment";
+import BirthControlQuestions from "./BirthControlQuestions";
 import GeneralQuestions from "./GeneralQuestions";
 
 interface ConsultationsType {
@@ -137,7 +138,25 @@ const Consultations = ({
               tobacco={c.tobacco}
               tobaccoNote={c.tobaccoNote}
             />
-            <Text style={styles.subHeader}>Birth Control</Text>
+            <BirthControlQuestions
+              pregnant={c.pregnant}
+              givenBirth={c.givenBirth}
+              isBreastfeeding={c.isBreastfeeding}
+              periodPreference={c.periodPreference}
+              primaryReason={c.primaryReason}
+              previousBirthControlPart1={c.previousBirthControlPart1}
+              previousBirthControlPart2={c.previousBirthControlPart2}
+              previousBirthControlPart2Note={c.previousBirthControlPart2Note}
+              sideEffectConcerns={c.sideEffectConcerns}
+              sideEffectConcernsNote={c.sideEffectConcernsNote}
+              progestinOnlyPillQuestions={c.progestinOnlyPillQuestions}
+              isGenericOk={c.isGenericOk}
+              drospirenoneWaiver={c.drospirenoneWaiver}
+              questionsForDoctor={c.questionsForDoctor}
+              questionsForDoctorNote={c.questionsForDoctorNote}
+              currentBirthControl={c.currentBirthControl}
+              currentBirthControlNote={c.currentBirthControlNote}
+            />
             <Text style={styles.subHeader}>Herpes/Antiviral</Text>
             <Text style={styles.subHeader}>Fertility</Text>
             <Text style={styles.subHeader}>Perimenopause</Text>
@@ -150,7 +169,6 @@ const Consultations = ({
 
 const styles = StyleSheet.create({
   consultations: {
-    margin: "32px 0",
     fontFamily: "Red Hat Mono",
     fontSize: "12px",
     lineHeight: "1.5",
