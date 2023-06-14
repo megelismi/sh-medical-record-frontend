@@ -1,31 +1,7 @@
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import ConsultationRow from "./ConsultationRow";
 
-const GeneralQuestions = ({
-  weight,
-  height,
-  allergies,
-  allergiesNote,
-  bloodClots,
-  bloodClotsNote,
-  bloodPressure,
-  diabetes,
-  diabetesNote,
-  heartConditions,
-  heartConditionsNote,
-  liverConditions,
-  liverConditionsNote,
-  medications,
-  medicationsNote,
-  migraines,
-  otherConditions,
-  otherConditionsNote,
-  stateCode,
-  surgeries,
-  surgeriesNote,
-  tobacco,
-  tobaccoNote,
-}: {
+const GeneralQuestions = (props: {
   weight: string | null;
   height: string | null;
   allergies: boolean | null;
@@ -50,174 +26,114 @@ const GeneralQuestions = ({
   tobacco: boolean | null;
   tobaccoNote: string | null;
 }) => {
-  const getGeneralValues = (): string[] => {
-    const generalValues = [];
-
-    if (weight) {
-      generalValues.push("weight");
-    }
-
-    if (height) {
-      generalValues.push("height");
-    }
-
-    if (allergies !== null) {
-      generalValues.push("allergies");
-    }
-
-    if (bloodClots !== null) {
-      generalValues.push("bloodClots");
-    }
-
-    if (bloodPressure) {
-      generalValues.push("bloodPressure");
-    }
-
-    if (diabetes !== null) {
-      generalValues.push("diabetes");
-    }
-
-    if (heartConditions !== null) {
-      generalValues.push("heartConditions");
-    }
-
-    if (liverConditions !== null) {
-      generalValues.push("liverConditions");
-    }
-
-    if (medications) {
-      generalValues.push("medications");
-    }
-
-    if (migraines) {
-      generalValues.push("migraines");
-    }
-
-    if (otherConditions) {
-      generalValues.push("otherConditions");
-    }
-
-    if (stateCode) {
-      generalValues.push("stateCode");
-    }
-
-    if (surgeries !== null) {
-      generalValues.push("surgeries");
-    }
-
-    if (tobacco !== null) {
-      generalValues.push("tobacco");
-    }
-
-    return generalValues;
-  };
-
-  const generalValues = getGeneralValues();
+  // Make sure we have some values to display, otherwise don't
+  // show the "Birth Control" title
+  const generalValues = Object.values(props).filter((value) => value !== null);
 
   return (
     <View>
       {generalValues.length ? (
         <Text style={styles.subHeader}>General</Text>
       ) : null}
-      {weight ? (
+      {props.weight !== null ? (
         <ConsultationRow
           question={"What is your weight?"}
-          answer={`${weight} lbs`}
+          answer={`${props.weight} lbs`}
         />
       ) : null}
-      {height ? (
+      {props.height !== null ? (
         <ConsultationRow
           question={"What is your height?"}
-          answer={`${height} in`}
+          answer={`${props.height} in`}
         />
       ) : null}
-      {allergies !== null ? (
+      {props.allergies !== null ? (
         <ConsultationRow
           question={"Are you allergic to any medications?"}
-          answer={allergies ? "Yes" : "No"}
-          note={allergiesNote}
+          answer={props.allergies ? "Yes" : "No"}
+          note={props.allergiesNote}
         />
       ) : null}
-      {bloodClots !== null ? (
+      {props.bloodClots !== null ? (
         <ConsultationRow
           question={
             "Do you have a personal or family history of deep vein thrombosis (DVT), pulmonary embolism (PE), or blood clotting disorder?"
           }
-          answer={bloodClots ? "Yes" : "No"}
-          note={bloodClotsNote}
+          answer={props.bloodClots ? "Yes" : "No"}
+          note={props.bloodClotsNote}
         />
       ) : null}
-      {bloodPressure ? (
+      {props.bloodPressure !== null ? (
         <ConsultationRow
           question={"What was your most recent blood pressure reading?"}
-          answer={bloodPressure}
+          answer={props.bloodPressure}
         />
       ) : null}
-      {diabetes !== null ? (
+      {props.diabetes !== null ? (
         <ConsultationRow
           question={"Do you have diabetes?"}
-          answer={diabetes ? "Yes" : "No"}
-          note={diabetesNote}
+          answer={props.diabetes ? "Yes" : "No"}
+          note={props.diabetesNote}
         />
       ) : null}
-      {heartConditions !== null ? (
+      {props.heartConditions !== null ? (
         <ConsultationRow
           question={"Do you have any heart or cholesterol conditions?"}
-          answer={heartConditions ? "Yes" : "No"}
-          note={heartConditionsNote}
+          answer={props.heartConditions ? "Yes" : "No"}
+          note={props.heartConditionsNote}
         />
       ) : null}
-      {liverConditions !== null ? (
+      {props.liverConditions !== null ? (
         <ConsultationRow
           question={"Do you have any liver or gallbladder conditions?"}
-          answer={liverConditions ? "Yes" : "No"}
-          note={liverConditionsNote}
+          answer={props.liverConditions ? "Yes" : "No"}
+          note={props.liverConditionsNote}
         />
       ) : null}
-      {medications ? (
+      {props.medications !== null ? (
         <ConsultationRow
           question={
             "Please tell us what medications and supplements you currently take."
           }
-          answer={medications}
-          note={medicationsNote}
+          answer={props.medications}
+          note={props.medicationsNote}
         />
       ) : null}
-      {migraines !== null ? (
+      {props.migraines !== null ? (
         <ConsultationRow
           question={"Do you have migraines with aura?"}
-          answer={migraines ? "Yes" : "No"}
+          answer={props.migraines ? "Yes" : "No"}
         />
       ) : null}
-      {otherConditions !== null ? (
+      {props.otherConditions !== null ? (
         <ConsultationRow
           question={"Do you have any other medical conditions?"}
-          answer={otherConditions ? "Yes" : "No"}
-          note={otherConditionsNote}
+          answer={props.otherConditions ? "Yes" : "No"}
+          note={props.otherConditionsNote}
         />
       ) : null}
-      {stateCode ? (
+      {props.stateCode !== null ? (
         <ConsultationRow
           question={"Please confirm some information: State of residence."}
-          answer={stateCode}
+          answer={props.stateCode}
         />
       ) : null}
-      {surgeries !== null ? (
+      {props.surgeries !== null ? (
         <ConsultationRow
           question={
             "Have you had any major surgeries or do you have any upcoming surgeries?"
           }
-          answer={surgeries ? "Yes" : "No"}
-          note={surgeriesNote}
+          answer={props.surgeries ? "Yes" : "No"}
+          note={props.surgeriesNote}
         />
       ) : null}
-      {tobacco !== null ? (
+      {props.tobacco !== null ? (
         <ConsultationRow
           question={
             "Do you ever smoke tobacco or use a nicotine/e-cigarette device?"
           }
-          answer={tobacco ? "Yes" : "No"}
-          note={tobaccoNote}
+          answer={props.tobacco ? "Yes" : "No"}
+          note={props.tobaccoNote}
         />
       ) : null}
     </View>

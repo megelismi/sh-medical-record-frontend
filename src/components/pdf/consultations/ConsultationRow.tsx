@@ -14,7 +14,7 @@ const ConsultationRow = ({
       <View style={styles.consultationQuestion}>
         <Text>{question}</Text>
       </View>
-      <View>
+      <View style={styles.consultationAnswer}>
         <Text>{answer}</Text>
       </View>
     </View>
@@ -38,7 +38,10 @@ const styles = StyleSheet.create({
     marginBottom: "8px",
   },
   consultationQuestion: {
-    maxWidth: "350px",
+    maxWidth: "325px",
+  },
+  consultationAnswer: {
+    maxWidth: "100px",
   },
   consultationNote: {
     marginTop: "-4px",

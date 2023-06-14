@@ -2,6 +2,7 @@ import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import moment from "moment";
 import BirthControlQuestions from "./BirthControlQuestions";
 import GeneralQuestions from "./GeneralQuestions";
+import HerpesAntiviralQuestions from "./HerpesAntiviral";
 
 interface ConsultationsType {
   createdAt: string;
@@ -38,7 +39,7 @@ interface ConsultationsType {
   heartConditions: boolean | null;
   heartConditionsNote: string | null;
   height: string | null;
-  herpesConsultConditions: boolean | null;
+  herpesConsultConditions: string | null;
   herpesConsultMedications: string | null;
   highBloodPressure: boolean | null;
   highBloodPressureNote: string | null;
@@ -75,7 +76,7 @@ interface ConsultationsType {
   progestinOnlyPillQuestions: boolean | null;
   questionsForDoctor: boolean | null;
   questionsForDoctorNote: string | null;
-  recentVaricellaOrZosterVaccination: null;
+  recentVaricellaOrZosterVaccination: boolean | null;
   regularMenstrualCycles: boolean | null;
   rheumatologicOrAutoimmuneDisorder: boolean | null;
   severeAcne: boolean | null;
@@ -157,7 +158,22 @@ const Consultations = ({
               currentBirthControl={c.currentBirthControl}
               currentBirthControlNote={c.currentBirthControlNote}
             />
-            <Text style={styles.subHeader}>Herpes/Antiviral</Text>
+            <HerpesAntiviralQuestions
+              coldSoresFrequency={c.coldSoresFrequency}
+              currentColdSoresOutbreak={c.currentColdSoresOutbreak}
+              currentGenitalHerpesOutbreak={c.currentGenitalHerpesOutbreak}
+              genitalHerpesFrequency={c.genitalHerpesFrequency}
+              herpesConsultConditions={c.herpesConsultConditions}
+              herpesConsultMedications={c.herpesConsultMedications}
+              hivOrAids={c.hivOrAids}
+              previouslyDiagnosedColdSores={c.previouslyDiagnosedColdSores}
+              previouslyDiagnosedGenitalHerpes={
+                c.previouslyDiagnosedGenitalHerpes
+              }
+              recentVaricellaOrZosterVaccination={
+                c.recentVaricellaOrZosterVaccination
+              }
+            />
             <Text style={styles.subHeader}>Fertility</Text>
             <Text style={styles.subHeader}>Perimenopause</Text>
           </View>

@@ -39,7 +39,7 @@ const BirthControlQuestions = (props: {
           answer={props.pregnant ? "Yes" : "No"}
         />
       ) : null}
-      {props.givenBirth ? (
+      {props.givenBirth !== null ? (
         <ConsultationRow
           question={"Have you given birth in the last 6 weeks?"}
           answer={props.givenBirth ? "Yes" : "No"}
@@ -61,7 +61,7 @@ const BirthControlQuestions = (props: {
           }
         />
       ) : null}
-      {props.primaryReason ? (
+      {props.primaryReason !== null ? (
         <ConsultationRow
           question={"What are your primary reasons for using birth control?"}
           answer={props.primaryReason}
@@ -87,7 +87,7 @@ const BirthControlQuestions = (props: {
           note={props.sideEffectConcernsNote}
         />
       ) : null}
-      {props.progestinOnlyPillQuestions ? (
+      {props.progestinOnlyPillQuestions !== null ? (
         <ConsultationRow
           question={
             "Because of your medical history, our doctor may prescribe you a progestin-only pill. Read more about progestin-only pills here. Would you like to include any notes or questions to the doctor about this medication?"
@@ -106,12 +106,12 @@ const BirthControlQuestions = (props: {
       {props.drospirenoneWaiver !== null ? (
         <ConsultationRow
           question={
-            "The brand of birth control you selected contains Drospirenone. Some studies have demonstrated a slightly higher risk of blood clots with birth control that contains drospirenone. This risk is still very low and is much lower than the risk of blood clots during pregnancy. If you would still like this brand of birth control, please read the following list of risk factors and confirm that none of these apply to you. Risk factors are: 1. Smoking and age 35 years or older 2. Less than 21 days postpartum or 21-42 days postpartum with other risk factors 3. History of deep vein thrombosis or pulmonary embolism 4. Hereditary thrombophilia (including antiphospholipid syndrome) 5. Inflammatory bowel disease with active or extensive disease, surgery, immobilization, corticosteroid use, vitamin deficiencies, or fluid depletion 6. Systemic lupus erythematosus with positive (or unknown) antiphospholipid antibodies 7. Major surgery with prolonged immobilization"
+            "The brand of birth control you selected contains Drospirenone. Some studies have demonstrated a slightly higher risk of blood clots with birth control that contains drospirenone. This risk is still very low and is much lower than the risk of blood clots during pregnancy. If you would still like this brand of birth control, please read the following list of risk factors and confirm that none of these apply to you. Risk factors are: Smoking and age 35 years or older, Less than 21 days postpartum or 21-42 days postpartum with other risk factors, History of deep vein thrombosis or pulmonary embolism, Hereditary thrombophilia (including antiphospholipid syndrome), Inflammatory bowel disease with active or extensive disease, surgery, immobilization, corticosteroid use, vitamin deficiencies, or fluid depletion, Systemic lupus erythematosus with positive (or unknown) antiphospholipid antibodies, Major surgery with prolonged immobilization"
           }
           answer={props.drospirenoneWaiver ? "Yes" : "No"}
         />
       ) : null}
-      {props.questionsForDoctor ? (
+      {props.questionsForDoctor !== null ? (
         <ConsultationRow
           question={
             "Is there anything else you want the doctor to know or do you have any questions?"
