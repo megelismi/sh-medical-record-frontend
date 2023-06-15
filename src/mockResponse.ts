@@ -122,7 +122,7 @@ export const response = {
                 "questionsForDoctor": null,
                 "questionsForDoctorNote": null,
                 "recentVaricellaOrZosterVaccination": false,
-                "regularMenstrualCycles": true,
+                "regularMenstrualCycles": 'Yes',
                 "rheumatologicOrAutoimmuneDisorder": null,
                 "severeAcne": null,
                 "severeMenstrualCramping": null,

@@ -451,7 +451,7 @@ const medicalKeysToQuestions = {
       question:
         'Are you using any type of hormonal contraception (such as birth control pills, patch, ring, injection, implant, or a hormone-containing IUD)?',
       answerChoices: ['Yes', 'No'],
-    },
+    },                                     
     vaginalDrynessOrPainWithSex: {
       question: 'Do you experience any of the following?',
       answerChoices: ['Vaginal dryness or pain with sex'],

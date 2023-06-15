@@ -4,6 +4,7 @@ import BirthControlQuestions from "./BirthControlQuestions";
 import FertilityQuestions from "./Fertility";
 import GeneralQuestions from "./GeneralQuestions";
 import HerpesAntiviralQuestions from "./HerpesAntiviral";
+import PerimenopauseQuestions from "./Perimenopause";
 
 // export enum Frequency {
 //   NEVER,
@@ -97,7 +98,7 @@ interface ConsultationsType {
   questionsForDoctor: boolean | null;
   questionsForDoctorNote: string | null;
   recentVaricellaOrZosterVaccination: boolean | null;
-  regularMenstrualCycles: boolean | null;
+  regularMenstrualCycles: string | null;
   rheumatologicOrAutoimmuneDisorder: boolean | null;
   severeAcne: boolean | null;
   severeMenstrualCramping: boolean | null;
@@ -225,7 +226,23 @@ const Consultations = ({
               uterinePolyps={c.uterinePolyps}
               weightGain={c.weightGain}
             />
-            <Text style={styles.subHeader}>Perimenopause</Text>
+            <PerimenopauseQuestions
+              bloating={c.bloating}
+              cervicalDysplasiaOrAbnormalPaps={
+                c.cervicalDysplasiaOrAbnormalPaps
+              }
+              decreasedLibido={c.decreasedLibido}
+              difficultySleeping={c.difficultySleeping}
+              hadPeriodInPastYear={c.hadPeriodInPastYear}
+              hotFlashesOrNightSweats={c.hotFlashesOrNightSweats}
+              irritabilityAnxietyDepressionOrWorseningPMS={
+                c.irritabilityAnxietyDepressionOrWorseningPMS
+              }
+              loseBalanceOrTripEasily={c.loseBalanceOrTripEasily}
+              regularMenstrualCycles={c.regularMenstrualCycles}
+              usingHormonalBirthControl={c.usingHormonalBirthControl}
+              vaginalDrynessOrPainWithSex={c.vaginalDrynessOrPainWithSex}
+            />
           </View>
         );
       })}
