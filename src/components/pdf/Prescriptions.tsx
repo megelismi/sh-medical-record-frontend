@@ -1,6 +1,6 @@
 import { Path, Text, View, StyleSheet, Svg } from "@react-pdf/renderer";
 
-const Prescriptions = () => {
+const Prescription = ({}) => {
   return (
     <View style={styles.prescriptions}>
       <View style={styles.prescriptionsHeader}>
@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Prescriptions;
+export default Prescription;
