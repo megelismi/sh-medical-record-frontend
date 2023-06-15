@@ -7,7 +7,7 @@ export const response = {
         "firstName": "Alice",
         "lastName": "Liddell",
         "sex": "FEMALE",
-        "dateOfBirth": "1988-09-30T00:00:00.000Z",
+        "dateOfBirth": "1988-09-30",
         "stateCode": "CA",
         "email": "alice@gmail.com",
         "phone": "(209) 777-4547",

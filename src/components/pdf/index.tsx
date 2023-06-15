@@ -87,7 +87,19 @@ const MyDoc = () => (
     <Page style={styles.page} size="A4">
       <View style={styles.section}>
         <PageHeader />
-        <PatientInfo />
+        <PatientInfo
+          firstName={response.patient.firstName}
+          lastName={response.patient.lastName}
+          sex={response.patient.sex}
+          dateOfBirth={response.patient.dateOfBirth}
+          email={response.patient.email}
+          phone={response.patient.phone}
+          addressLine1={response.patient.addressLine1}
+          addressLine2={response.patient.addressLine2}
+          city={response.patient.city}
+          stateCode={response.patient.stateCode}
+          postalCode={response.patient.postalCode}
+        />
       </View>
       <Text
         style={styles.pageNumber}
