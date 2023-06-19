@@ -130,8 +130,8 @@ const MyDoc = () => (
       />
     </Page>
 
-    {response.patient.consultations.map((consultation) => (
-      <Page style={styles.page} size="A4" break>
+    {response.patient.consultations.map((consultation, index) => (
+      <Page key={`consultation-${index}`} style={styles.page} size="A4" break>
         <View style={styles.section}>
           <PageHeader />
           <Consultations consultation={consultation} />
