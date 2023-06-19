@@ -1,8 +1,9 @@
 import React from "react";
-import PDF from "./components/pdf";
+import PatientSearch from "./components/patientSearch";
+// import PDF from "./components/pdf";
 
 function App() {
-  return <PDF />;
+  return <PatientSearch />;
 }
 
 export default App;
