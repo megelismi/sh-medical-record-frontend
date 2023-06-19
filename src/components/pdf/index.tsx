@@ -12,7 +12,7 @@ import { response } from "../../mockResponse";
 import Consultations from "./consultations";
 import Insurance from "./Insurance";
 import PatientInfo from "./PatientInfo";
-import Prescriptions from "./Prescriptions";
+import Prescription from "./Prescription";
 import SHLogo from "../images/SH_logo.png";
 
 Font.register({
@@ -107,17 +107,22 @@ const MyDoc = () => (
         fixed
       />
     </Page>
-    <Page style={styles.page} size="A4" break>
-      <View style={styles.section}>
-        <PageHeader />
-        <Prescriptions />
-      </View>
-      <Text
-        style={styles.pageNumber}
-        render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`}
-        fixed
-      />
-    </Page>
+    {response.patient.prescriptions.map((prescription, index) => (
+      <Page key={`prescription-${index}`} style={styles.page} size="A4" break>
+        <View style={styles.section}>
+          <PageHeader />
+          <Prescription prescription={prescription} />
+        </View>
+        <Text
+          style={styles.pageNumber}
+          render={({ pageNumber, totalPages }) =>
+            `${pageNumber} / ${totalPages}`
+          }
+          fixed
+        />
+      </Page>
+    ))}
+
     {response.patient.insurancePolicies.map((insurance, index) => (
       <Page key={`insurance-${index}`} style={styles.page} size="A4" break>
         <View style={styles.section}>
