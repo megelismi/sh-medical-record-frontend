@@ -129,17 +129,22 @@ const MyDoc = () => (
         fixed
       />
     </Page>
-    <Page style={styles.page} size="A4" break>
-      <View style={styles.section}>
-        <PageHeader />
-        <Consultations consultations={response.patient.consultations} />
-      </View>
-      <Text
-        style={styles.pageNumber}
-        render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`}
-        fixed
-      />
-    </Page>
+
+    {response.patient.consultations.map((consultation) => (
+      <Page style={styles.page} size="A4" break>
+        <View style={styles.section}>
+          <PageHeader />
+          <Consultations consultation={consultation} />
+        </View>
+        <Text
+          style={styles.pageNumber}
+          render={({ pageNumber, totalPages }) =>
+            `${pageNumber} / ${totalPages}`
+          }
+          fixed
+        />
+      </Page>
+    ))}
   </Document>
 );
 

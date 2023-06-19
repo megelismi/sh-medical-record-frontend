@@ -25,7 +25,7 @@ import PerimenopauseQuestions from "./Perimenopause";
 //   MID_CYCLE_BLEEDING,
 // }
 
-interface ConsultationsType {
+interface ConsultationType {
   createdAt: string;
   abdominalOrPelvicSurgeries: boolean | null;
   alcoholUsage: string | null;
@@ -120,138 +120,130 @@ interface ConsultationsType {
   weightGain: boolean | null;
 }
 
-const Consultations = ({
-  consultations,
-}: {
-  consultations: ConsultationsType[];
-}) => {
-  return (
-    <View style={styles.consultations}>
-      {consultations.map((c, index) => {
-        const createdAtDate = moment(new Date(c.createdAt)).format("LL");
+const Consultation = ({ consultation }: { consultation: ConsultationType }) => {
+  const createdAtDate = moment(new Date(consultation.createdAt)).format("LL");
 
-        return (
-          <View key={index}>
-            <Text style={styles.pageHeader}>
-              Consultation Date: {createdAtDate}
-            </Text>
-            <GeneralQuestions
-              weight={c.weight}
-              height={c.height}
-              allergies={c.allergies}
-              allergiesNote={c.allergiesNote}
-              bloodClots={c.bloodClots}
-              bloodClotsNote={c.bloodClotsNote}
-              bloodPressure={c.bloodPressure}
-              diabetes={c.diabetes}
-              diabetesNote={c.diabetesNote}
-              heartConditions={c.heartConditions}
-              heartConditionsNote={c.heartConditionsNote}
-              liverConditions={c.liverConditions}
-              liverConditionsNote={c.liverConditionsNote}
-              medications={c.medications}
-              medicationsNote={c.medicationsNote}
-              migraines={c.migraines}
-              otherConditions={c.otherConditions}
-              otherConditionsNote={c.otherConditionsNote}
-              stateCode={c.stateCode}
-              surgeries={c.surgeries}
-              surgeriesNote={c.surgeriesNote}
-              tobacco={c.tobacco}
-              tobaccoNote={c.tobaccoNote}
-            />
-            <BirthControlQuestions
-              pregnant={c.pregnant}
-              givenBirth={c.givenBirth}
-              isBreastfeeding={c.isBreastfeeding}
-              periodPreference={c.periodPreference}
-              primaryReason={c.primaryReason}
-              previousBirthControlPart1={c.previousBirthControlPart1}
-              previousBirthControlPart2={c.previousBirthControlPart2}
-              previousBirthControlPart2Note={c.previousBirthControlPart2Note}
-              sideEffectConcerns={c.sideEffectConcerns}
-              sideEffectConcernsNote={c.sideEffectConcernsNote}
-              progestinOnlyPillQuestions={c.progestinOnlyPillQuestions}
-              isGenericOk={c.isGenericOk}
-              drospirenoneWaiver={c.drospirenoneWaiver}
-              questionsForDoctor={c.questionsForDoctor}
-              questionsForDoctorNote={c.questionsForDoctorNote}
-              currentBirthControl={c.currentBirthControl}
-              currentBirthControlNote={c.currentBirthControlNote}
-            />
-            <HerpesAntiviralQuestions
-              coldSoresFrequency={c.coldSoresFrequency}
-              currentColdSoresOutbreak={c.currentColdSoresOutbreak}
-              currentGenitalHerpesOutbreak={c.currentGenitalHerpesOutbreak}
-              genitalHerpesFrequency={c.genitalHerpesFrequency}
-              herpesConsultConditions={c.herpesConsultConditions}
-              herpesConsultMedications={c.herpesConsultMedications}
-              hivOrAids={c.hivOrAids}
-              previouslyDiagnosedColdSores={c.previouslyDiagnosedColdSores}
-              previouslyDiagnosedGenitalHerpes={
-                c.previouslyDiagnosedGenitalHerpes
-              }
-              recentVaricellaOrZosterVaccination={
-                c.recentVaricellaOrZosterVaccination
-              }
-            />
-            <FertilityQuestions
-              abdominalOrPelvicSurgeries={c.abdominalOrPelvicSurgeries}
-              averageMenstrualCycle={c.averageMenstrualCycle}
-              endometriosis={c.endometriosis}
-              excessHairGrowth={c.excessHairGrowth}
-              exerciseFrequency={c.exerciseFrequency}
-              fibroids={c.fibroids}
-              hairLoss={c.hairLoss}
-              highBloodPressure={c.highBloodPressure}
-              highBloodPressureNote={c.highBloodPressureNote}
-              highProlactinLevel={c.highProlactinLevel}
-              menstrualCycleDetails={c.menstrualCycleDetails}
-              monthlyMenstrualCycles={c.monthlyMenstrualCycles}
-              ovarianCysts={c.ovarianCysts}
-              painBowelMovements={c.painBowelMovements}
-              painDeepPenetrativeSex={c.painDeepPenetrativeSex}
-              painPelvic={c.painPelvic}
-              patchesOfThickenedDarkenedSkin={c.patchesOfThickenedDarkenedSkin}
-              polycysticOvarianSyndrome={c.polycysticOvarianSyndrome}
-              rheumatologicOrAutoimmuneDisorder={
-                c.rheumatologicOrAutoimmuneDisorder
-              }
-              severeAcne={c.severeAcne}
-              severeMenstrualCramping={c.severeMenstrualCramping}
-              sexuallyTransmittedInfection={c.sexuallyTransmittedInfection}
-              supplements={c.supplements}
-              tobaccoUsage={c.tobaccoUsage}
-              thyroidDisorder={c.thyroidDisorder}
-              uterinePolyps={c.uterinePolyps}
-              weightGain={c.weightGain}
-            />
-            <PerimenopauseQuestions
-              bloating={c.bloating}
-              cervicalDysplasiaOrAbnormalPaps={
-                c.cervicalDysplasiaOrAbnormalPaps
-              }
-              decreasedLibido={c.decreasedLibido}
-              difficultySleeping={c.difficultySleeping}
-              hadPeriodInPastYear={c.hadPeriodInPastYear}
-              hotFlashesOrNightSweats={c.hotFlashesOrNightSweats}
-              irritabilityAnxietyDepressionOrWorseningPMS={
-                c.irritabilityAnxietyDepressionOrWorseningPMS
-              }
-              loseBalanceOrTripEasily={c.loseBalanceOrTripEasily}
-              regularMenstrualCycles={c.regularMenstrualCycles}
-              usingHormonalBirthControl={c.usingHormonalBirthControl}
-              vaginalDrynessOrPainWithSex={c.vaginalDrynessOrPainWithSex}
-            />
-          </View>
-        );
-      })}
+  return (
+    <View style={styles.consultation}>
+      <Text style={styles.pageHeader}>Consultation Date: {createdAtDate}</Text>
+      <GeneralQuestions
+        weight={consultation.weight}
+        height={consultation.height}
+        allergies={consultation.allergies}
+        allergiesNote={consultation.allergiesNote}
+        bloodClots={consultation.bloodClots}
+        bloodClotsNote={consultation.bloodClotsNote}
+        bloodPressure={consultation.bloodPressure}
+        diabetes={consultation.diabetes}
+        diabetesNote={consultation.diabetesNote}
+        heartConditions={consultation.heartConditions}
+        heartConditionsNote={consultation.heartConditionsNote}
+        liverConditions={consultation.liverConditions}
+        liverConditionsNote={consultation.liverConditionsNote}
+        medications={consultation.medications}
+        medicationsNote={consultation.medicationsNote}
+        migraines={consultation.migraines}
+        otherConditions={consultation.otherConditions}
+        otherConditionsNote={consultation.otherConditionsNote}
+        stateCode={consultation.stateCode}
+        surgeries={consultation.surgeries}
+        surgeriesNote={consultation.surgeriesNote}
+        tobacco={consultation.tobacco}
+        tobaccoNote={consultation.tobaccoNote}
+      />
+      <BirthControlQuestions
+        pregnant={consultation.pregnant}
+        givenBirth={consultation.givenBirth}
+        isBreastfeeding={consultation.isBreastfeeding}
+        periodPreference={consultation.periodPreference}
+        primaryReason={consultation.primaryReason}
+        previousBirthControlPart1={consultation.previousBirthControlPart1}
+        previousBirthControlPart2={consultation.previousBirthControlPart2}
+        previousBirthControlPart2Note={
+          consultation.previousBirthControlPart2Note
+        }
+        sideEffectConcerns={consultation.sideEffectConcerns}
+        sideEffectConcernsNote={consultation.sideEffectConcernsNote}
+        progestinOnlyPillQuestions={consultation.progestinOnlyPillQuestions}
+        isGenericOk={consultation.isGenericOk}
+        drospirenoneWaiver={consultation.drospirenoneWaiver}
+        questionsForDoctor={consultation.questionsForDoctor}
+        questionsForDoctorNote={consultation.questionsForDoctorNote}
+        currentBirthControl={consultation.currentBirthControl}
+        currentBirthControlNote={consultation.currentBirthControlNote}
+      />
+      <HerpesAntiviralQuestions
+        coldSoresFrequency={consultation.coldSoresFrequency}
+        currentColdSoresOutbreak={consultation.currentColdSoresOutbreak}
+        currentGenitalHerpesOutbreak={consultation.currentGenitalHerpesOutbreak}
+        genitalHerpesFrequency={consultation.genitalHerpesFrequency}
+        herpesConsultConditions={consultation.herpesConsultConditions}
+        herpesConsultMedications={consultation.herpesConsultMedications}
+        hivOrAids={consultation.hivOrAids}
+        previouslyDiagnosedColdSores={consultation.previouslyDiagnosedColdSores}
+        previouslyDiagnosedGenitalHerpes={
+          consultation.previouslyDiagnosedGenitalHerpes
+        }
+        recentVaricellaOrZosterVaccination={
+          consultation.recentVaricellaOrZosterVaccination
+        }
+      />
+      <FertilityQuestions
+        abdominalOrPelvicSurgeries={consultation.abdominalOrPelvicSurgeries}
+        averageMenstrualCycle={consultation.averageMenstrualCycle}
+        endometriosis={consultation.endometriosis}
+        excessHairGrowth={consultation.excessHairGrowth}
+        exerciseFrequency={consultation.exerciseFrequency}
+        fibroids={consultation.fibroids}
+        hairLoss={consultation.hairLoss}
+        highBloodPressure={consultation.highBloodPressure}
+        highBloodPressureNote={consultation.highBloodPressureNote}
+        highProlactinLevel={consultation.highProlactinLevel}
+        menstrualCycleDetails={consultation.menstrualCycleDetails}
+        monthlyMenstrualCycles={consultation.monthlyMenstrualCycles}
+        ovarianCysts={consultation.ovarianCysts}
+        painBowelMovements={consultation.painBowelMovements}
+        painDeepPenetrativeSex={consultation.painDeepPenetrativeSex}
+        painPelvic={consultation.painPelvic}
+        patchesOfThickenedDarkenedSkin={
+          consultation.patchesOfThickenedDarkenedSkin
+        }
+        polycysticOvarianSyndrome={consultation.polycysticOvarianSyndrome}
+        rheumatologicOrAutoimmuneDisorder={
+          consultation.rheumatologicOrAutoimmuneDisorder
+        }
+        severeAcne={consultation.severeAcne}
+        severeMenstrualCramping={consultation.severeMenstrualCramping}
+        sexuallyTransmittedInfection={consultation.sexuallyTransmittedInfection}
+        supplements={consultation.supplements}
+        tobaccoUsage={consultation.tobaccoUsage}
+        thyroidDisorder={consultation.thyroidDisorder}
+        uterinePolyps={consultation.uterinePolyps}
+        weightGain={consultation.weightGain}
+      />
+      <PerimenopauseQuestions
+        bloating={consultation.bloating}
+        cervicalDysplasiaOrAbnormalPaps={
+          consultation.cervicalDysplasiaOrAbnormalPaps
+        }
+        decreasedLibido={consultation.decreasedLibido}
+        difficultySleeping={consultation.difficultySleeping}
+        hadPeriodInPastYear={consultation.hadPeriodInPastYear}
+        hotFlashesOrNightSweats={consultation.hotFlashesOrNightSweats}
+        irritabilityAnxietyDepressionOrWorseningPMS={
+          consultation.irritabilityAnxietyDepressionOrWorseningPMS
+        }
+        loseBalanceOrTripEasily={consultation.loseBalanceOrTripEasily}
+        regularMenstrualCycles={consultation.regularMenstrualCycles}
+        usingHormonalBirthControl={consultation.usingHormonalBirthControl}
+        vaginalDrynessOrPainWithSex={consultation.vaginalDrynessOrPainWithSex}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  consultations: {
+  consultation: {
     fontFamily: "Red Hat Mono",
     fontSize: "12px",
     lineHeight: "1.5",
@@ -264,4 +256,4 @@ const styles = StyleSheet.create({
   subHeader: { fontWeight: "bold", margin: "10px 0" },
 });
 
-export default Consultations;
+export default Consultation;
