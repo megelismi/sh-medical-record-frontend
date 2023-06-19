@@ -118,17 +118,21 @@ const MyDoc = () => (
         fixed
       />
     </Page>
-    <Page style={styles.page} size="A4" break>
-      <View style={styles.section}>
-        <PageHeader />
-        <Insurance />
-      </View>
-      <Text
-        style={styles.pageNumber}
-        render={({ pageNumber, totalPages }) => `${pageNumber} / ${totalPages}`}
-        fixed
-      />
-    </Page>
+    {response.patient.insurancePolicies.map((insurance, index) => (
+      <Page key={`insurance-${index}`} style={styles.page} size="A4" break>
+        <View style={styles.section}>
+          <PageHeader />
+          <Insurance insurance={insurance} />
+        </View>
+        <Text
+          style={styles.pageNumber}
+          render={({ pageNumber, totalPages }) =>
+            `${pageNumber} / ${totalPages}`
+          }
+          fixed
+        />
+      </Page>
+    ))}
 
     {response.patient.consultations.map((consultation, index) => (
       <Page key={`consultation-${index}`} style={styles.page} size="A4" break>

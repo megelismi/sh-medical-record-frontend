@@ -297,8 +297,7 @@ export const response = {
                 "pcn": "DE",
                 "isMedicaid": false,
                 "patientId": 1
-            }
-
+            },
         ]
     }
 }

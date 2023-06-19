@@ -1,14 +1,24 @@
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
-const Insurance = () => (
+interface InsuranceType {
+  planName: string;
+  memberName: string;
+  memberId: string;
+  rxGroup: string | null;
+  rxBin: string | null;
+  pcn: string | null;
+}
+
+const Insurance = ({ insurance }: { insurance: InsuranceType }) => (
   <View style={styles.insurancePolicy}>
-    <Text style={styles.pageHeader}>Insurance Policies</Text>
+    <Text style={styles.pageHeader}>Insurance Policy</Text>
     <View style={styles.insurancePolicyDetails}>
-      <Text>Name: Jaclyn Fry</Text>
-      <Text>Member ID: 1234567890</Text>
-      <Text>RX Group: PHRCRML</Text>
-      <Text>RX Bin: 003858</Text>
-      <Text>Plan: Priority</Text>
+      <Text>Plan: {insurance.planName}</Text>
+      <Text>Member Name: {insurance.memberName}</Text>
+      <Text>Member ID: {insurance.memberId ?? "-"}</Text>
+      <Text>RX Group: {insurance.rxGroup ?? "-"}</Text>
+      <Text>RX Bin: {insurance.rxBin ?? "-"}</Text>
+      <Text>PCN: {insurance.pcn ?? "-"}</Text>
     </View>
   </View>
 );
