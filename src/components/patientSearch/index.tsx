@@ -1,45 +1,52 @@
 import { useState } from "react";
+import axios from "axios";
 
 const PatientSearch = () => {
   const [email, setEmail] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
 
-  const handleGetMedicalRecords = () => {};
+  const handleGetMedicalRecords = () => {
+    console.log("email", email);
+    console.log("dateOfBirth", dateOfBirth);
+
+    axios
+      .post("http://localhost:7000/medical-records/get", {
+        email,
+        dob: dateOfBirth, //yyyy-mm-dd
+      })
+      // @ts-ignore
+      .then((res) => {
+        console.log("res", res);
+      })
+      // @ts-ignore
+      .catch((error) =>
+        console.error(
+          `There was an error retrieving the medical record: ${error}`
+        )
+      );
+  };
 
   const disabled = email.trim() === "" || dateOfBirth.trim() === "";
 
   return (
-    <form className="w-full max-w-lg">
+    <form
+      className="w-1/3 min-w-max max-w-lg"
+      onSubmit={(e) => e.preventDefault()}
+    >
       <div className="flex flex-wrap -mx-3 mb-6">
-        <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-first-name"
+            htmlFor="grid-email"
           >
-            First Name
+            Email
           </label>
           <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-            id="grid-first-name"
+            className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+            id="grid-email"
             type="text"
-            placeholder="Jane"
-          />
-          <p className="text-red-500 text-xs italic">
-            Please fill out this field.
-          </p>
-        </div>
-        <div className="w-full md:w-1/2 px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-last-name"
-          >
-            Last Name
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-last-name"
-            type="text"
-            placeholder="Doe"
+            placeholder="alice@gmail.com"
+            onChange={(e) => setEmail(e.currentTarget.value)}
           />
         </div>
       </div>
@@ -47,76 +54,28 @@ const PatientSearch = () => {
         <div className="w-full px-3">
           <label
             className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-password"
+            htmlFor="grid-dob"
           >
-            Password
+            Date of Birth
           </label>
           <input
             className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-password"
-            type="password"
-            placeholder="******************"
-          />
-          <p className="text-gray-600 text-xs italic">
-            Make it as long and as crazy as you'd like
-          </p>
-        </div>
-      </div>
-      <div className="flex flex-wrap -mx-3 mb-2">
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-city"
-          >
-            City
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-city"
-            type="text"
-            placeholder="Albuquerque"
+            id="grid-dob"
+            type="date"
+            placeholder="09/30/1993"
+            onChange={(e) => setDateOfBirth(e.currentTarget.value)}
           />
         </div>
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-state"
+        <div className="w-full flex items-center justify-center px-3 py-8">
+          <button
+            disabled={disabled}
+            onClick={handleGetMedicalRecords}
+            className={`bg-violet-500 text-white font-bold py-2 px-4 rounded w-full ${
+              disabled ? "opacity-50 cursor-not-allowed" : "hover:bg-violet-700"
+            }`}
           >
-            State
-          </label>
-          <div className="relative">
-            <select
-              className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-state"
-            >
-              <option>New Mexico</option>
-              <option>Missouri</option>
-              <option>Texas</option>
-            </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <svg
-                className="fill-current h-4 w-4"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg>
-            </div>
-          </div>
-        </div>
-        <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-zip"
-          >
-            Zip
-          </label>
-          <input
-            className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            id="grid-zip"
-            type="text"
-            placeholder="90210"
-          />
+            Get Medical Records
+          </button>
         </div>
       </div>
     </form>
@@ -124,50 +83,3 @@ const PatientSearch = () => {
 };
 
 export default PatientSearch;
-
-{
-  /* <div>
-      <div>
-        <div onSubmit={() => {}}>
-          <div>
-            <fieldset>
-              <label classNameName="form-label" htmlFor="title">
-                Enter email:
-              </label>
-              <input
-                classNameName="form-input"
-                type="text"
-                id="title"
-                name="title"
-                value={email}
-                onChange={(e) => setEmail(e.currentTarget.value)}
-              />
-            </fieldset>
-
-            <fieldset>
-              <label classNameName="form-label" htmlFor="author">
-                Enter DOB:
-              </label>
-
-              <input
-                classNameName="form-input"
-                type="date"
-                id="dob"
-                name="dob"
-                value={dateOfBirth}
-                onChange={(e) => setDateOfBirth(e.currentTarget.value)}
-              />
-            </fieldset>
-          </div>
-        </div>
-
-        <button
-          disabled={disabled}
-          onClick={handleGetMedicalRecords}
-          classNameName={`btn btn-search ${disabled ? "btn-disabled" : ""}`}
-        >
-          Get Medical Records
-        </button>
-      </div>
-    </div> */
-}
