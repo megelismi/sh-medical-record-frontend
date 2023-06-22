@@ -1,7 +1,7 @@
 import { Path, Text, View, StyleSheet, Svg } from "@react-pdf/renderer";
 import moment from "moment";
 
-interface PrescriptionType {
+export interface PrescriptionType {
   prescriberSignature: string;
   prescriberLicenseNumber: string;
   npi: string;

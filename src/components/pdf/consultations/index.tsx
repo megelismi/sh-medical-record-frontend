@@ -25,7 +25,7 @@ import PerimenopauseQuestions from "./Perimenopause";
 //   MID_CYCLE_BLEEDING,
 // }
 
-interface ConsultationType {
+export interface ConsultationType {
   createdAt: string;
   abdominalOrPelvicSurgeries: boolean | null;
   alcoholUsage: string | null;

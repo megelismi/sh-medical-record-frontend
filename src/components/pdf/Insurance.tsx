@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 
-interface InsuranceType {
+export interface InsuranceType {
   planName: string;
   memberName: string;
   memberId: string;

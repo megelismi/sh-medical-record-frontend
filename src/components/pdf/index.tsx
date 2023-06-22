@@ -8,12 +8,15 @@ import {
   View,
   StyleSheet,
 } from "@react-pdf/renderer";
-import { response } from "../../mockResponse";
+
 import Consultations from "./consultations";
 import Insurance from "./Insurance";
 import PatientInfo from "./PatientInfo";
 import Prescription from "./Prescription";
 import SHLogo from "../images/SH_logo.png";
+import type { ConsultationType } from "./consultations";
+import type { InsuranceType } from "./Insurance";
+import type { PrescriptionType } from "./Prescription";
 
 Font.register({
   family: "Roboto",
@@ -82,23 +85,48 @@ const styles = StyleSheet.create({
   },
 });
 
-const MyDoc = () => (
+interface Patient {
+  firstName: string;
+  lastName: string;
+  sex: string;
+  dateOfBirth: string;
+  email: string;
+  phone: string;
+  addressLine1: string;
+  addressLine2: string | null;
+  city: string;
+  stateCode: string;
+  postalCode: string;
+  prescriptions: PrescriptionType[];
+  insurancePolicies: InsuranceType[];
+  consultations: ConsultationType[];
+}
+
+export interface MedicalRecordsType {
+  patient: Patient;
+}
+
+const MedicalRecords = ({
+  medicalRecords,
+}: {
+  medicalRecords: MedicalRecordsType;
+}) => (
   <Document>
     <Page style={styles.page} size="A4">
       <View style={styles.section}>
         <PageHeader />
         <PatientInfo
-          firstName={response.patient.firstName}
-          lastName={response.patient.lastName}
-          sex={response.patient.sex}
-          dateOfBirth={response.patient.dateOfBirth}
-          email={response.patient.email}
-          phone={response.patient.phone}
-          addressLine1={response.patient.addressLine1}
-          addressLine2={response.patient.addressLine2}
-          city={response.patient.city}
-          stateCode={response.patient.stateCode}
-          postalCode={response.patient.postalCode}
+          firstName={medicalRecords.patient.firstName}
+          lastName={medicalRecords.patient.lastName}
+          sex={medicalRecords.patient.sex}
+          dateOfBirth={medicalRecords.patient.dateOfBirth}
+          email={medicalRecords.patient.email}
+          phone={medicalRecords.patient.phone}
+          addressLine1={medicalRecords.patient.addressLine1}
+          addressLine2={medicalRecords.patient.addressLine2}
+          city={medicalRecords.patient.city}
+          stateCode={medicalRecords.patient.stateCode}
+          postalCode={medicalRecords.patient.postalCode}
         />
       </View>
       <Text
@@ -107,53 +135,59 @@ const MyDoc = () => (
         fixed
       />
     </Page>
-    {response.patient.prescriptions.map((prescription, index) => (
-      <Page key={`prescription-${index}`} style={styles.page} size="A4" break>
-        <View style={styles.section}>
-          <PageHeader />
-          <Prescription prescription={prescription} />
-        </View>
-        <Text
-          style={styles.pageNumber}
-          render={({ pageNumber, totalPages }) =>
-            `${pageNumber} / ${totalPages}`
-          }
-          fixed
-        />
-      </Page>
-    ))}
+    {medicalRecords.patient.prescriptions.map(
+      (prescription: PrescriptionType, index: number) => (
+        <Page key={`prescription-${index}`} style={styles.page} size="A4" break>
+          <View style={styles.section}>
+            <PageHeader />
+            <Prescription prescription={prescription} />
+          </View>
+          <Text
+            style={styles.pageNumber}
+            render={({ pageNumber, totalPages }) =>
+              `${pageNumber} / ${totalPages}`
+            }
+            fixed
+          />
+        </Page>
+      )
+    )}
 
-    {response.patient.insurancePolicies.map((insurance, index) => (
-      <Page key={`insurance-${index}`} style={styles.page} size="A4" break>
-        <View style={styles.section}>
-          <PageHeader />
-          <Insurance insurance={insurance} />
-        </View>
-        <Text
-          style={styles.pageNumber}
-          render={({ pageNumber, totalPages }) =>
-            `${pageNumber} / ${totalPages}`
-          }
-          fixed
-        />
-      </Page>
-    ))}
+    {medicalRecords.patient.insurancePolicies.map(
+      (insurance: InsuranceType, index: number) => (
+        <Page key={`insurance-${index}`} style={styles.page} size="A4" break>
+          <View style={styles.section}>
+            <PageHeader />
+            <Insurance insurance={insurance} />
+          </View>
+          <Text
+            style={styles.pageNumber}
+            render={({ pageNumber, totalPages }) =>
+              `${pageNumber} / ${totalPages}`
+            }
+            fixed
+          />
+        </Page>
+      )
+    )}
 
-    {response.patient.consultations.map((consultation, index) => (
-      <Page key={`consultation-${index}`} style={styles.page} size="A4" break>
-        <View style={styles.section}>
-          <PageHeader />
-          <Consultations consultation={consultation} />
-        </View>
-        <Text
-          style={styles.pageNumber}
-          render={({ pageNumber, totalPages }) =>
-            `${pageNumber} / ${totalPages}`
-          }
-          fixed
-        />
-      </Page>
-    ))}
+    {medicalRecords.patient.consultations.map(
+      (consultation: ConsultationType, index: number) => (
+        <Page key={`consultation-${index}`} style={styles.page} size="A4" break>
+          <View style={styles.section}>
+            <PageHeader />
+            <Consultations consultation={consultation} />
+          </View>
+          <Text
+            style={styles.pageNumber}
+            render={({ pageNumber, totalPages }) =>
+              `${pageNumber} / ${totalPages}`
+            }
+            fixed
+          />
+        </Page>
+      )
+    )}
   </Document>
 );
 
@@ -163,9 +197,18 @@ const PageHeader = () => (
   </View>
 );
 
-const DownloadableDoc = () => (
+export const DownloadableDoc = ({
+  medicalRecords,
+  fileName,
+}: {
+  medicalRecords: MedicalRecordsType;
+  fileName: string;
+}) => (
   <div>
-    <PDFDownloadLink document={<MyDoc />} fileName="somename.pdf">
+    <PDFDownloadLink
+      document={<MedicalRecords medicalRecords={medicalRecords} />}
+      fileName={fileName}
+    >
       {({ blob, url, loading, error }) =>
         loading ? "Loading document..." : "Download now!"
       }
