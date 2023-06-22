@@ -24,8 +24,8 @@ export interface PrescriptionType {
 }
 
 const Prescription = ({ prescription }: { prescription: PrescriptionType }) => {
-  const issueDate = moment(new Date(prescription.dateWritten)).calendar();
-  const expirationDate = moment(issueDate).add(1, "y").calendar();
+  const issueDate = moment(new Date(prescription.dateWritten)).format("LL");
+  const expirationDate = moment(issueDate).add(1, "y").format("LL");
 
   return (
     <View style={styles.prescriptions}>
