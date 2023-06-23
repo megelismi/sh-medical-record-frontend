@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import SearchError from "./SearchError";
 import SearchSuccess from "./SearchSuccess";
 
 // TODO: put in env variables
@@ -12,6 +13,7 @@ const PatientSearch = () => {
   // mode: SEARCH, SEARCH_SUCCESS, SEARCH_ERROR
   const [mode, setMode] = useState("SEARCH");
   const [medicalRecords, setMedicalRecords] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const getAccessToken = async () => {
     let accessToken = null;
@@ -69,11 +71,14 @@ const PatientSearch = () => {
         }
       })
       // @ts-ignore
-      .catch((error) =>
+      .catch((error) => {
+        setMode("SEARCH_ERROR");
+        setErrorMessage(error.message);
+
         console.error(
           `There was an error retrieving the medical record: ${error}`
-        )
-      );
+        );
+      });
 
     return patientMedicalRecords;
   };
@@ -82,13 +87,23 @@ const PatientSearch = () => {
     try {
       const medicalRecords = await getMedicalRecords();
 
+      throw new Error(
+        "ahh real monsters!!! ahh real monsters!!! ahh real monsters!!! ahh real monsters!!! ahh real monsters!!! ahh real monsters!!!ahh real monsters!!! ahh real monsters!!! ahh real monsters!!! ahh real monsters!!! ahh real monsters!!!"
+      );
+
       setMedicalRecords(medicalRecords);
 
       setMode("SEARCH_SUCCESS");
 
       console.log("medicalRecords", medicalRecords);
-    } catch (e) {
-      // TODO: Set an error that we can show in the UI
+      // @ts-ignore
+    } catch (error: { message: string }) {
+      setMode("SEARCH_ERROR");
+      setErrorMessage(error.message);
+
+      console.error(
+        `There was an error retrieving the medical record: ${error.message}`
+      );
     }
   };
 
@@ -157,6 +172,14 @@ const PatientSearch = () => {
       ) : mode === "SEARCH_SUCCESS" ? (
         <SearchSuccess
           medicalRecords={medicalRecords}
+          onBack={() => {
+            // TODO: Hit some reset mode where we refresh everything
+            setMode("SEARCH");
+          }}
+        />
+      ) : mode === "SEARCH_ERROR" ? (
+        <SearchError
+          errorMessage={errorMessage}
           onBack={() => {
             // TODO: Hit some reset mode where we refresh everything
             setMode("SEARCH");
