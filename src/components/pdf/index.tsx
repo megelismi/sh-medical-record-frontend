@@ -210,7 +210,7 @@ export const DownloadableDoc = ({
       fileName={fileName}
     >
       {({ blob, url, loading, error }) =>
-        loading ? "Loading document..." : "Download now!"
+        loading ? "Loading document..." : "Download"
       }
     </PDFDownloadLink>
   </div>
