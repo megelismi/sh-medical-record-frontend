@@ -6,6 +6,10 @@ import SearchSuccess from "./SearchSuccess";
 // TODO: put in env variables
 const CLIENT_ID = "694545696556";
 const CLIENT_SECRET = "JvCjr3Vk9bNLyHDnPu1w3Nng";
+const TOKEN_NOT_VALID_MESSAGE =
+  "Access Token not found, please generate a new one";
+let storedAccessToken: string | null = null;
+let tokenTries = 0;
 
 const PatientSearch = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +20,24 @@ const PatientSearch = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const getAccessToken = async () => {
-    let accessToken = null;
+    tokenTries++;
+
+    console.log("tokenTries", tokenTries);
+
+    if (tokenTries >= 4) {
+      console.log("why are we getting here??");
+      throw new Error(
+        "Could not generate an access token to retrieve medical records. Please check your client credentials."
+      );
+    }
+
+    if (storedAccessToken !== null) {
+      console.log("returning stored access token");
+      console.log("accessToken", storedAccessToken);
+      return storedAccessToken;
+    }
+
+    console.log("generating new access token");
 
     await axios
       .post("http://localhost:7000/access-token", {
@@ -25,28 +46,26 @@ const PatientSearch = () => {
       })
       // @ts-ignore
       .then((res) => {
-        if (res.data.status === "success") {
-          accessToken = res.data.accessToken;
-        } else if (res.data.status === "error") {
-          throw new Error(res.data);
-        }
+        storedAccessToken = res.data.accessToken;
       })
       // @ts-ignore
-      .catch((error) =>
+      .catch((error) => {
+        setMode("SEARCH_ERROR");
+        setErrorMessage(
+          `There was an error retrieving the medical record: ${error}`
+        );
         console.error(
           `There was an error retrieving the access token: ${error}`
-        )
-      );
+        );
+      });
 
-    return accessToken;
+    return storedAccessToken;
   };
 
   const getMedicalRecords = async () => {
     let patientMedicalRecords = null;
 
-    // find a way to store the accessToken and expiration...
-    // maybe in local or session storage if that's secure enough
-    const accessToken = await getAccessToken();
+    const token = await getAccessToken();
 
     await axios
       .post(
@@ -57,23 +76,30 @@ const PatientSearch = () => {
         },
         {
           headers: {
-            Authorization: `AccessToken ${accessToken}`,
+            Authorization: `AccessToken ${token}`,
           },
         }
       )
 
       // @ts-ignore
-      .then((res) => {
-        if (res.data.status === "success") {
-          patientMedicalRecords = { patient: res.data.patient };
-        } else if (res.data.status === "error") {
-          throw new Error(res.data);
-        }
+      .then(async (res) => {
+        patientMedicalRecords = { patient: res.data.patient };
       })
       // @ts-ignore
       .catch((error) => {
+        if (error.response?.data?.error === TOKEN_NOT_VALID_MESSAGE) {
+          // If the token is not valid, regenerate the token and try again
+          // This is limited to 3 tries before an error is thrown
+
+          storedAccessToken = null;
+
+          return getMedicalRecords();
+        }
+
         setMode("SEARCH_ERROR");
-        setErrorMessage(error.message);
+        setErrorMessage(
+          `There was an error retrieving the medical record: ${error}`
+        );
 
         console.error(
           `There was an error retrieving the medical record: ${error}`
@@ -87,19 +113,15 @@ const PatientSearch = () => {
     try {
       const medicalRecords = await getMedicalRecords();
 
-      throw new Error(
-        "ahh real monsters!!! ahh real monsters!!! ahh real monsters!!! ahh real monsters!!! ahh real monsters!!! ahh real monsters!!!ahh real monsters!!! ahh real monsters!!! ahh real monsters!!! ahh real monsters!!! ahh real monsters!!!"
-      );
-
       setMedicalRecords(medicalRecords);
 
       setMode("SEARCH_SUCCESS");
-
-      console.log("medicalRecords", medicalRecords);
       // @ts-ignore
     } catch (error: { message: string }) {
       setMode("SEARCH_ERROR");
       setErrorMessage(error.message);
+
+      console.log("are we throwing here????");
 
       console.error(
         `There was an error retrieving the medical record: ${error.message}`
