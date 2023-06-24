@@ -6,9 +6,9 @@ const SearchError = ({
   onBack: () => void;
 }) => {
   return (
-    <div className="mt-10 w-96">
+    <div style={{ maxWidth: "575px", minWidth: "350px" }} className="mt-10">
       <div
-        className="bg-red-100 border-t-4 border-red-400 rounded-b text-red-700 px-4 py-3 shadow-md"
+        className="bg-red-100 border-t-4 border-red-400 rounded-b text-red-700 px-5 py-4 shadow-md"
         role="alert"
       >
         <div className="flex flex-col">
