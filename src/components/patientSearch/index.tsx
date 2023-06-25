@@ -4,8 +4,8 @@ import SearchError from "./SearchError";
 import SearchSuccess from "./SearchSuccess";
 
 // TODO: put in env variables
-const CLIENT_ID = "694545696556";
-const CLIENT_SECRET = "JvCjr3Vk9bNLyHDnPu1w3Nng";
+const CLIENT_ID = "328082669266";
+const CLIENT_SECRET = "dYVqM40nGyX765E1F6p2LEqB";
 const TOKEN_NOT_VALID_MESSAGE =
   "Access Token not found, please generate a new one";
 let storedAccessToken: string | null = null;
