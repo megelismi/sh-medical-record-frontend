@@ -14,7 +14,7 @@ app.use(cors());
 dotenv.config();
 
 // Listening for port 5000
-app.listen(5000, () => console.log(`Server is running on ${port}`));
+app.listen(5000, () => console.log(`Backend server is running on ${port}`));
 
 app.get("/access-token", async (req, res) => {
   await axios
