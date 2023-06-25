@@ -1,25 +1,8 @@
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import ConsultationRow from "./ConsultationRow";
+import type { BirthControlQuestionType } from "../../../types";
 
-const BirthControlQuestions = (props: {
-  pregnant: boolean | null;
-  givenBirth: boolean | null;
-  isBreastfeeding: boolean | null;
-  periodPreference: string | null;
-  primaryReason: string | null;
-  previousBirthControlPart1: boolean | null;
-  previousBirthControlPart2: boolean | null;
-  previousBirthControlPart2Note: string | null;
-  sideEffectConcerns: boolean | null;
-  sideEffectConcernsNote: string | null;
-  progestinOnlyPillQuestions: boolean | null;
-  isGenericOk: boolean | null;
-  drospirenoneWaiver: boolean | null;
-  questionsForDoctor: boolean | null;
-  questionsForDoctorNote: string | null;
-  currentBirthControl: string | null;
-  currentBirthControlNote: string | null;
-}) => {
+const BirthControlQuestions = (props: BirthControlQuestionType) => {
   // Make sure we have some values to display, otherwise don't
   // show the "Birth Control" title
   const birthControlValues = Object.values(props).filter(

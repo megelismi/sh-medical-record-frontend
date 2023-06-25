@@ -1,19 +1,8 @@
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import ConsultationRow from "./ConsultationRow";
+import type { PerimenopauseQuestionType } from "../../../types";
 
-const PerimenopauseQuestions = (props: {
-  bloating: boolean | null;
-  cervicalDysplasiaOrAbnormalPaps: boolean | null;
-  decreasedLibido: boolean | null;
-  difficultySleeping: boolean | null;
-  hadPeriodInPastYear: boolean | null;
-  hotFlashesOrNightSweats: boolean | null;
-  irritabilityAnxietyDepressionOrWorseningPMS: boolean | null;
-  loseBalanceOrTripEasily: boolean | null;
-  regularMenstrualCycles: string | null;
-  usingHormonalBirthControl: boolean | null;
-  vaginalDrynessOrPainWithSex: boolean | null;
-}) => {
+const PerimenopauseQuestions = (props: PerimenopauseQuestionType) => {
   // Make sure we have some values to display, otherwise don't
   // show the "Perimenopause" title
   const perimenopauseValues = Object.values(props).filter(

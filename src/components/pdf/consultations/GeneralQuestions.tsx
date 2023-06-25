@@ -1,31 +1,8 @@
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import ConsultationRow from "./ConsultationRow";
+import type { GeneralQuestionType } from "../../../types";
 
-const GeneralQuestions = (props: {
-  weight: string | null;
-  height: string | null;
-  allergies: boolean | null;
-  allergiesNote: string | null;
-  bloodClots: boolean | null;
-  bloodClotsNote: string | null;
-  bloodPressure: string | null;
-  diabetes: boolean | null;
-  diabetesNote: string | null;
-  heartConditions: boolean | null;
-  heartConditionsNote: string | null;
-  liverConditions: boolean | null;
-  liverConditionsNote: string | null;
-  medications: string | null;
-  medicationsNote: string | null;
-  migraines: boolean | null;
-  otherConditions: boolean | null;
-  otherConditionsNote: string | null;
-  stateCode: string | null;
-  surgeries: boolean | null;
-  surgeriesNote: string | null;
-  tobacco: boolean | null;
-  tobaccoNote: string | null;
-}) => {
+const GeneralQuestions = (props: GeneralQuestionType) => {
   // Make sure we have some values to display, otherwise don't
   // show the "Birth Control" title
   const generalValues = Object.values(props).filter((value) => value !== null);

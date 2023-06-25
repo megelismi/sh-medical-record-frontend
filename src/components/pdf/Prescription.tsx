@@ -1,27 +1,6 @@
 import { Path, Text, View, StyleSheet, Svg } from "@react-pdf/renderer";
 import moment from "moment";
-
-export interface PrescriptionType {
-  prescriberSignature: string;
-  prescriberLicenseNumber: string;
-  npi: string;
-  deaNumber: string;
-  dateWritten: string;
-  prescriberAddressLine1: string;
-  prescriberAddressLine2: string | null;
-  prescriberCity: string;
-  prescriberState: string;
-  prescriberPostalCode: string;
-  prescriberPhone: string;
-  medication: string;
-  ndc: string;
-  sig: string;
-  quantity: number;
-  unit: string;
-  refills: number;
-  daw: boolean;
-  indication: string | null;
-}
+import type { PrescriptionType } from "../../types";
 
 const Prescription = ({ prescription }: { prescription: PrescriptionType }) => {
   const issueDate = moment(new Date(prescription.dateWritten)).format("LL");

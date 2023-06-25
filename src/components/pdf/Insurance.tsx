@@ -1,13 +1,5 @@
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
-
-export interface InsuranceType {
-  planName: string;
-  memberName: string;
-  memberId: string;
-  rxGroup: string | null;
-  rxBin: string | null;
-  pcn: string | null;
-}
+import type { InsuranceType } from "../../types";
 
 const Insurance = ({ insurance }: { insurance: InsuranceType }) => (
   <View style={styles.insurancePolicy}>

@@ -8,15 +8,14 @@ import {
   View,
   StyleSheet,
 } from "@react-pdf/renderer";
-
 import Consultations from "./consultations";
 import Insurance from "./Insurance";
 import PatientInfo from "./PatientInfo";
 import Prescription from "./Prescription";
 import SHLogo from "../images/SH_logo.png";
-import type { ConsultationType } from "./consultations";
-import type { InsuranceType } from "./Insurance";
-import type { PrescriptionType } from "./Prescription";
+import type { ConsultationType } from "../../types";
+import type { InsuranceType } from "../../types";
+import type { PrescriptionType } from "../../types";
 
 Font.register({
   family: "Roboto",

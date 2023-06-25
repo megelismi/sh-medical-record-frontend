@@ -1,77 +1,8 @@
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import ConsultationRow from "./ConsultationRow";
-// import { Frequency, MenstrualCycleDetail } from "./index";
+import type { FertilityQuestionType } from "../../../types";
 
-// interface FrequencyAnswers {
-//   NEVER: string;
-//   FEW_TIMES_A_YEAR: string;
-//   FEW_TIMES_A_MONTH: string;
-//   FEW_TIMES_A_WEEK: string;
-//   FEW_TIMES_A_DAY: string;
-//   DAILY: string;
-// }
-
-// const FREQUENCY_ANSWERS: FrequencyAnswers = {
-//   NEVER: "Never",
-//   FEW_TIMES_A_YEAR: "A few times a year",
-//   FEW_TIMES_A_MONTH: "A few times a month",
-//   FEW_TIMES_A_WEEK: "A few times a week",
-//   FEW_TIMES_A_DAY: "A few times a day",
-//   DAILY: "Daily",
-// };
-
-// interface MenstrualCycleAnswers {
-//   BLEED_LONGER_7_DAYS: string;
-//   BLEED_LESS_2_DAYS: string;
-//   CHANGE_TAMPON_EVERY_HOUR: string;
-//   CYCLE_SHORTER_21_DAYS: string;
-//   HEAVY_BLEEDING: string;
-//   PASS_BLOOD_CLOTS: string;
-//   MID_CYCLE_BLEEDING: string;
-// }
-
-// const MENSTRUAL_CYCLE_ANSWERS: MenstrualCycleAnswers = {
-//   BLEED_LONGER_7_DAYS: "I bleed longer than 7 days.",
-//   BLEED_LESS_2_DAYS: "I bleed less than 2 days.",
-//   CHANGE_TAMPON_EVERY_HOUR:
-//     "I change my pad/tampon every hour or more on my heaviest days.",
-//   CYCLE_SHORTER_21_DAYS: "My cycle is typically shorter than 21 days.",
-//   HEAVY_BLEEDING:
-//     "I change my pad/tampon every hour or more on my heaviest days.",
-//   PASS_BLOOD_CLOTS: "I more than occassionally pass blood clots.",
-//   MID_CYCLE_BLEEDING:
-//     "I’ve had mid-cycle bleeding/spotting on more than one occassion.",
-// };
-
-const FertilityQuestions = (props: {
-  abdominalOrPelvicSurgeries: boolean | null;
-  averageMenstrualCycle: string | null;
-  endometriosis: boolean | null;
-  excessHairGrowth: boolean | null;
-  exerciseFrequency: string | null;
-  fibroids: boolean | null;
-  hairLoss: boolean | null;
-  highBloodPressure: boolean | null;
-  highBloodPressureNote: string | null;
-  highProlactinLevel: boolean | null;
-  menstrualCycleDetails: string | null;
-  monthlyMenstrualCycles: boolean | null;
-  ovarianCysts: boolean | null;
-  painBowelMovements: boolean | null;
-  painDeepPenetrativeSex: boolean | null;
-  painPelvic: boolean | null;
-  patchesOfThickenedDarkenedSkin: boolean | null;
-  polycysticOvarianSyndrome: boolean | null;
-  rheumatologicOrAutoimmuneDisorder: boolean | null;
-  severeAcne: boolean | null;
-  severeMenstrualCramping: boolean | null;
-  sexuallyTransmittedInfection: boolean | null;
-  supplements: string | null;
-  tobaccoUsage: string | null;
-  thyroidDisorder: boolean | null;
-  uterinePolyps: boolean | null;
-  weightGain: boolean | null;
-}) => {
+const FertilityQuestions = (props: FertilityQuestionType) => {
   // Make sure we have some values to display, otherwise don't
   // show the "Birth Control" title
   const fertilityValues = Object.values(props).filter(

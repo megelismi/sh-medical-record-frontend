@@ -1,19 +1,6 @@
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import moment from "moment";
-
-interface Patient {
-  firstName: string;
-  lastName: string;
-  sex: string;
-  dateOfBirth: string;
-  email: string;
-  phone: string;
-  addressLine1: string;
-  addressLine2: string | null;
-  city: string;
-  stateCode: string;
-  postalCode: string;
-}
+import type { PatientInfoType } from "../../types";
 
 const PatientInfo = ({
   firstName,
@@ -27,7 +14,7 @@ const PatientInfo = ({
   city,
   stateCode,
   postalCode,
-}: Patient) => (
+}: PatientInfoType) => (
   <View style={styles.patientInfo}>
     <Text style={styles.pageHeader}>Patient Information</Text>
     <Text>

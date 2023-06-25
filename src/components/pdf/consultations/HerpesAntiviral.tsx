@@ -1,18 +1,8 @@
 import { Text, View, StyleSheet } from "@react-pdf/renderer";
 import ConsultationRow from "./ConsultationRow";
+import type { HerpesAntiviralQuestionType } from "../../../types";
 
-const HerpesAntiviralQuestions = (props: {
-  coldSoresFrequency: string | null;
-  currentColdSoresOutbreak: boolean | null;
-  currentGenitalHerpesOutbreak: boolean | null;
-  genitalHerpesFrequency: string | null;
-  herpesConsultConditions: string | null;
-  herpesConsultMedications: string | null;
-  hivOrAids: boolean | null;
-  previouslyDiagnosedColdSores: boolean | null;
-  previouslyDiagnosedGenitalHerpes: boolean | null;
-  recentVaricellaOrZosterVaccination: boolean | null;
-}) => {
+const HerpesAntiviralQuestions = (props: HerpesAntiviralQuestionType) => {
   // Make sure we have some values to display, otherwise don't
   // show the "Herpes/Antiviral" title
   const herpesAntiviralValues = Object.values(props).filter(
