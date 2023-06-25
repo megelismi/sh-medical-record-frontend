@@ -79,7 +79,7 @@ const PerimenopauseQuestions = (props: PerimenopauseQuestionType) => {
           question={
             "Are your menstrual cycles roughly the same length each month? In other words, they don’t vary in length by more than three days from month to month."
           }
-          answer={props.regularMenstrualCycles}
+          answer={props.regularMenstrualCycles ? "Yes" : "No"}
         />
       ) : null}
       {props.usingHormonalBirthControl !== null ? (

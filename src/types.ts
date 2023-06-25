@@ -141,7 +141,7 @@ export interface InsuranceType {
     hotFlashesOrNightSweats: boolean | null;
     irritabilityAnxietyDepressionOrWorseningPMS: boolean | null;
     loseBalanceOrTripEasily: boolean | null;
-    regularMenstrualCycles: string | null;
+    regularMenstrualCycles: boolean | null;
     usingHormonalBirthControl: boolean | null;
     vaginalDrynessOrPainWithSex: boolean | null;
   }
@@ -219,7 +219,7 @@ export interface InsuranceType {
     questionsForDoctor: boolean | null;
     questionsForDoctorNote: string | null;
     recentVaricellaOrZosterVaccination: boolean | null;
-    regularMenstrualCycles: string | null;
+    regularMenstrualCycles: boolean | null;
     rheumatologicOrAutoimmuneDisorder: boolean | null;
     severeAcne: boolean | null;
     severeMenstrualCramping: boolean | null;

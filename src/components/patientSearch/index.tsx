@@ -3,9 +3,6 @@ import axios, { AxiosResponse } from "axios";
 import SearchError from "./SearchError";
 import SearchSuccess from "./SearchSuccess";
 
-// TODO: put in env variables
-const CLIENT_ID = "328082669266";
-const CLIENT_SECRET = "dYVqM40nGyX765E1F6p2LEqB";
 const TOKEN_NOT_VALID_MESSAGE =
   "Access Token not found, please generate a new one";
 let storedAccessToken: string | null = null;
@@ -31,17 +28,19 @@ const PatientSearch = () => {
       return storedAccessToken;
     }
 
+    // Grab the access token from the server
+    // We're doing it this way, so that our client id and client secret
+    // is not exposed to the browser
     await axios
-      .post("http://localhost:7000/access-token", {
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
+      .request({
+        method: "GET",
+        url: "http://localhost:5000/access-token",
       })
-      .then((res: AxiosResponse) => {
-        storedAccessToken = res.data.accessToken;
+      .then((response: AxiosResponse) => {
+        storedAccessToken = response.data.accessToken;
       })
-      .catch((error) => {
-        // If it exists, prefer to throw the error message from the server
-        throw new Error(error.response?.data?.error ?? error);
+      .catch(function (error) {
+        console.error(error);
       });
 
     return storedAccessToken;
