@@ -1,6 +1,6 @@
 import React from "react";
 import SignIn from "./pages/SignIn";
-import PatientSearch from "./pages/PatientSearch";
+import MedicalRecordsSearch from "./pages/MedicalRecordsSearch";
 import Users from "./pages/Users";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
@@ -18,7 +18,7 @@ function App() {
 
         {/* private routes */}
         <Route element={<RequireAuth />}>
-          <Route path="patient-search" element={<PatientSearch />} />
+          <Route path="medical-records" element={<MedicalRecordsSearch />} />
           <Route path="users" element={<Users />} />
         </Route>
 

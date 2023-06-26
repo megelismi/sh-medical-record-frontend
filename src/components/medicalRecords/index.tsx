@@ -1,6 +1,5 @@
 import { useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import SHLogo from "../../images/SH_logo.png";
 import SearchError from "./SearchError";
 import SearchSuccess from "./SearchSuccess";
 
@@ -9,7 +8,7 @@ const TOKEN_NOT_VALID_MESSAGE =
 let storedAccessToken: string | null = null;
 let tokenTries = 0;
 
-const PatientSearch = () => {
+const MedicalRecordsSearch = () => {
   const [email, setEmail] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   // SEARCH, SEARCH_SUCCESS, SEARCH_ERROR
@@ -122,7 +121,6 @@ const PatientSearch = () => {
 
   return (
     <div className="p-5 mt-5 flex flex-col justify-center items-center w-100">
-      <img className="w-64 mb-6" src={SHLogo} alt="SimpleHealth Logo" />
       {mode === "SEARCH" ? (
         <>
           <div className="py-10">
@@ -230,4 +228,4 @@ const PatientSearch = () => {
   );
 };
 
-export default PatientSearch;
+export default MedicalRecordsSearch;

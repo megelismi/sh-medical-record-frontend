@@ -34,8 +34,6 @@ function SignIn({ onError }: { onError: (errorMessage: string) => void }) {
    * is saved in Session Storage.
    */
   const verifyUser = async (email: string) => {
-    console.log("verifying user...", email);
-
     await axios
       .post("http://localhost:5000/get-user", {
         email,
@@ -44,7 +42,7 @@ function SignIn({ onError }: { onError: (errorMessage: string) => void }) {
         if (res.data.user) {
           sessionStorage.setItem("user", res.data.user.token);
           sessionStorage.setItem("userRole", res.data.user.role);
-          navigate("/patient-search");
+          navigate("/medical-records");
         }
       })
       .catch((error) => {
