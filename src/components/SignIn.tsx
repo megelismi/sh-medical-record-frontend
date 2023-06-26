@@ -36,40 +36,20 @@ function SignIn() {
   const verifyUser = async (email: string) => {
     console.log("verifying user...", email);
 
-    // Get the an access token for the medical records api
-    const accessToken = await axios
-      .request({
-        method: "GET",
-        url: "http://localhost:5000/access-token",
-      })
-      .then((response: AxiosResponse) => {
-        return response.data.accessToken;
-      })
-      .catch(function (error) {
-        throw new Error(error);
-      });
-
     await axios
-      .post(
-        "http://localhost:7000/get-user",
-        {
-          email,
-        },
-        {
-          headers: {
-            Authorization: `AccessToken ${accessToken}`,
-          },
-        }
-      )
+      .post("http://localhost:5000/get-user", {
+        email,
+      })
       .then((res: AxiosResponse) => {
         if (res.data.user) {
-          console.log("res.data.user");
-          localStorage.setItem("user", res.data.user.email);
+          console.log("res.data.user", res.data.user);
+          localStorage.setItem("user", res.data.user.token);
           localStorage.setItem("userRole", res.data.user.role);
           navigate("/patient-search");
         }
       })
       .catch((error) => {
+        // TODO: error handling
         console.error("error verifying user!", error);
       });
   };
