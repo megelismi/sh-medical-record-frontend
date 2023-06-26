@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import axios, { AxiosResponse } from "axios";
 
-function SignIn() {
+function SignIn({ onError }: { onError: (errorMessage: string) => void }) {
   const navigate = useNavigate();
 
   const handleGoogleCallbackResponse = async (response: {
@@ -12,27 +12,27 @@ function SignIn() {
     if (response.credential) {
       const userObject: { email?: string } = jwt_decode(response.credential);
 
-      console.log("userObject", userObject);
-
       if (userObject.email) {
         try {
           await verifyUser(userObject.email);
-        } catch (e) {
-          // do something with this
-          console.error(e);
+        } catch (error: any) {
+          onError(error.message);
         }
-        // report the error!
       } else {
-        // report the error!
+        onError("Could not verify Google account");
       }
-
-      // console.log("userObject", userObject);
     } else {
-      // TODO: proper error handling
-      console.log("login failed!");
+      onError("Could not verify Google account");
     }
   };
 
+  /* This function verifies that the provided email address is a user
+   * that exists in the medical records api database.
+   * It pings the local Node server, which reaches out to medical records
+   * api, and if the user is verified, then the local server will return
+   * the user object and a session token. That session token and the user's role
+   * is saved in Session Storage.
+   */
   const verifyUser = async (email: string) => {
     console.log("verifying user...", email);
 
@@ -48,8 +48,13 @@ function SignIn() {
         }
       })
       .catch((error) => {
-        // TODO: error handling
-        console.error("error verifying user!", error);
+        if (error.response?.data?.error?.status === 404) {
+          onError("User account not found");
+        } else if (error.response?.data?.error?.status === 400) {
+          onError("Bad request - missing email");
+        } else {
+          onError("Login error. Please check your credentials and try again.");
+        }
       });
   };
 
@@ -70,7 +75,11 @@ function SignIn() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div id="signInDiv"></div>;
+  return (
+    <>
+      <div id="signInDiv"></div>
+    </>
+  );
 }
 
 export default SignIn;
