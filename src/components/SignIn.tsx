@@ -1,13 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
 import jwt_decode from "jwt-decode";
 import axios, { AxiosResponse } from "axios";
 
 function SignIn() {
-  // If we successfully sign in, then we're going to setAuth in the global context
-  // @ts-ignore - setAuth does exist on useAuth
-  const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
 
   const handleGoogleCallbackResponse = async (response: {
@@ -76,8 +72,6 @@ function SignIn() {
       .catch((error) => {
         console.error("error verifying user!", error);
       });
-
-    console.log("auth", auth);
   };
 
   useEffect(() => {
