@@ -19,8 +19,8 @@ app.listen(5000, () => console.log(`Backend server is running on ${port}`));
 app.get("/access-token", async (req, res) => {
   await axios
     .post("http://localhost:7000/access-token", {
-      client_id: process.env.REACT_APP_CLIENT_ID,
-      client_secret: process.env.REACT_APP_CLIENT_SECRET,
+      client_id: process.env.REACT_APP_MEDICAL_RECORDS_API_CLIENT_ID,
+      client_secret: process.env.REACT_APP_MEDICAL_RECORDS_API_CLIENT_SECRET,
     })
     .then((response) => {
       return res.status(200).json(response.data);
