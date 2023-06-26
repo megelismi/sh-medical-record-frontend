@@ -1,7 +1,9 @@
+import UsersTable from "../components/UsersTable";
+
 const Users = () => {
   return (
     <div>
-      <h1>User's page</h1>
+      <UsersTable />
     </div>
   );
 };
