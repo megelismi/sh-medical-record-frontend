@@ -106,6 +106,7 @@ const PatientSearch = () => {
       // @ts-ignore
     } catch (error) {
       setMode("SEARCH_ERROR");
+      setLoading(false);
 
       setErrorMessage(
         `There was an error retrieving the medical records: ${error}`
