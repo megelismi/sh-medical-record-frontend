@@ -42,9 +42,8 @@ function SignIn() {
       })
       .then((res: AxiosResponse) => {
         if (res.data.user) {
-          console.log("res.data.user", res.data.user);
-          localStorage.setItem("user", res.data.user.token);
-          localStorage.setItem("userRole", res.data.user.role);
+          sessionStorage.setItem("user", res.data.user.token);
+          sessionStorage.setItem("userRole", res.data.user.role);
           navigate("/patient-search");
         }
       })

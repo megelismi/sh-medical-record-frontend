@@ -1,5 +1,6 @@
 // Initializing installed dependencies
 import express from "express";
+import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import axios from "axios";
 import cors from "cors";
@@ -9,7 +10,10 @@ import otpGenerator from "otp-generator";
 const port = 5000;
 
 const app = express();
+
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Initializing env variables
 dotenv.config();
@@ -46,7 +50,7 @@ app.get("/access-token", async (req, res) => {
 });
 
 app.post("/get-user", async (req, res) => {
-  const email = "meg.eli.smi@gmail.com";
+  const email = req.body.email;
 
   if (!email) {
     return res.status(400).json({ error: "Missing user email" });
