@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios, { AxiosResponse } from "axios";
+import SHLogo from "../../images/SH_logo.png";
 import SearchError from "./SearchError";
 import SearchSuccess from "./SearchSuccess";
 
@@ -119,7 +120,8 @@ const PatientSearch = () => {
   const disabled = email.trim() === "" || dateOfBirth.trim() === "";
 
   return (
-    <>
+    <div className="p-5 mt-5 flex flex-col justify-center items-center w-100">
+      <img className="w-64 mb-6" src={SHLogo} alt="SimpleHealth Logo" />
       {mode === "SEARCH" ? (
         <>
           <div className="py-10">
@@ -223,7 +225,7 @@ const PatientSearch = () => {
           }}
         />
       ) : null}
-    </>
+    </div>
   );
 };
 

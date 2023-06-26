@@ -1,16 +1,34 @@
 import React from "react";
-import PatientSearch from "./components/patientSearch";
-import SHLogo from "./components/images/SH_logo.png";
-// import PDF from "./components/pdf";
+import SignIn from "./pages/SignIn";
+import PatientSearch from "./pages/PatientSearch";
+import Users from "./pages/Users";
+import NotFound from "./pages/NotFound";
+import Layout from "./components/Layout";
+import Unauthorized from "./pages/Unauthorized";
+import RequireAuth from "./components/RequireAuth";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="p-5 mt-5 flex flex-col justify-center items-center w-100">
-      <img className="w-64 mb-6" src={SHLogo} alt="SimpleHealth Logo" />
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        {/* public routes */}
+        <Route path="login" element={<SignIn />} />
+        <Route path="unauthorized" element={<Unauthorized />} />
 
-      <PatientSearch />
-    </div>
+        {/* private routes */}
+        <Route element={<RequireAuth />}>
+          <Route path="patient-search" element={<PatientSearch />} />
+          <Route path="users" element={<Users />} />
+        </Route>
+
+        {/* catch all */}
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
+
+//return <PatientSearch />;
 
 export default App;
