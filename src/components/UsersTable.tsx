@@ -1,7 +1,7 @@
 const UsersTable = () => {
   return (
     <>
-      <div className="ml-20 mr-16 mt-24 mb-4 flex justify-between">
+      <div className="mx-20 mt-24 mb-4 flex justify-between">
         <h1 className="font-bold text-2xl">User's Table</h1>
         <button
           onClick={() => console.log("adding new user")}
