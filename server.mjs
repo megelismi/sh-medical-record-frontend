@@ -49,7 +49,32 @@ app.get("/access-token", async (req, res) => {
   }
 });
 
-app.post("/get-user", async (req, res) => {
+app.get("/users/get-all", async (req, res) => {
+  const accessToken = await getAccessToken();
+
+  try {
+    await axios
+      .post(
+        "http://localhost:7000/users/get-all",
+        {},
+        {
+          headers: {
+            Authorization: `AccessToken ${accessToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        return res.status(200).json(response.data);
+      })
+      .catch((error) => {
+        return res.status(500).json({ error });
+      });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+});
+
+app.post("/users/get-user", async (req, res) => {
   const email = req.body.email;
 
   if (!email) {
@@ -61,7 +86,7 @@ app.post("/get-user", async (req, res) => {
 
     await axios
       .post(
-        "http://localhost:7000/get-user",
+        "http://localhost:7000/users/get-user",
         {
           email,
         },

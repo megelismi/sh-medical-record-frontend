@@ -35,7 +35,7 @@ function SignIn({ onError }: { onError: (errorMessage: string) => void }) {
    */
   const verifyUser = async (email: string) => {
     await axios
-      .post("http://localhost:5000/get-user", {
+      .post("http://localhost:5000/users/get-user", {
         email,
       })
       .then((res: AxiosResponse) => {

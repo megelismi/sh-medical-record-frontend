@@ -1,4 +1,23 @@
-const UsersTable = () => {
+import type { User } from "../pages/Users";
+
+const UserRow = ({ user }: { user: User }) => {
+  return (
+    <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+      <td className="px-6 py-4">{user.email}</td>
+      <td className="px-6 py-4">{user.role}</td>
+      <td className="px-6 py-4">
+        <a
+          href="#"
+          className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+        >
+          Edit
+        </a>
+      </td>
+    </tr>
+  );
+};
+
+const UsersTable = ({ users }: { users: User[] }) => {
   return (
     <>
       <div className="mx-20 mt-24 mb-4 flex justify-between">
@@ -15,9 +34,6 @@ const UsersTable = () => {
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">
-                Name
-              </th>
-              <th scope="col" className="px-6 py-3">
                 Email
               </th>
               <th scope="col" className="px-6 py-3">
@@ -29,96 +45,9 @@ const UsersTable = () => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Megan Smith
-              </th>
-              <td className="px-6 py-4">meg.eli.smi@gmail.com</td>
-              <td className="px-6 py-4">ADMIN</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Edit
-                </a>
-              </td>
-            </tr>
-            <tr className="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Jamel Clarke
-              </th>
-              <td className="px-6 py-4">jclarke@simplehealth.com</td>
-              <td className="px-6 py-4">USER</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Edit
-                </a>
-              </td>
-            </tr>
-            <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Dominique Jasper
-              </th>
-              <td className="px-6 py-4">djasper@simplehealth.com</td>
-              <td className="px-6 py-4">ADMIN</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Edit
-                </a>
-              </td>
-            </tr>
-            <tr className="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Sam Farzin
-              </th>
-              <td className="px-6 py-4">sfarzin@simplehealth.com</td>
-              <td className="px-6 py-4">ADMIN</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Edit
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                Amy Fan
-              </th>
-              <td className="px-6 py-4">amy@twentyeighthealth.com</td>
-              <td className="px-6 py-4">USER</td>
-              <td className="px-6 py-4">
-                <a
-                  href="#"
-                  className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  Edit
-                </a>
-              </td>
-            </tr>
+            {users.map((user) => (
+              <UserRow key={`user-${user.id}`} user={user} />
+            ))}
           </tbody>
         </table>
       </div>
