@@ -123,8 +123,13 @@ const MedicalRecordsSearch = () => {
     <div className="p-5 mt-5 flex flex-col justify-center items-center w-100">
       {mode === "SEARCH" ? (
         <>
-          <div className="py-10">
-            Some text explaining the medical records search
+          <h1 className="font-bold text-3xl mt-6">
+            SimpleHealth Medical Records
+          </h1>
+          <div className="py-10 w-[510px]">
+            Instantly retrieve a former SimpleHealth patient's medical history
+            (prescriptions, consultations & insurance info) by inputting their
+            email and DOB
           </div>
           <form
             className="w-1/3 min-w-max max-w-lg"

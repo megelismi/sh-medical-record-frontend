@@ -1,6 +1,5 @@
 import { useState } from "react";
-import AddUserForm from "./AddUserForm";
-// import AddUserModal from "./AddUserModal";
+import AddUserModal from "./AddUserModal";
 import type { User } from "../pages/Users";
 
 const UserRow = ({ user }: { user: User }) => {
@@ -39,9 +38,7 @@ const UsersTable = ({ users }: { users: User[] }) => {
 
   return (
     <>
-      {showAddUser ? (
-        <AddUserForm onClose={() => setShowAddUser(false)} />
-      ) : null}
+      <AddUserModal show={showAddUser} onClose={() => setShowAddUser(false)} />
       <div className="mx-20 mt-24 mb-4 flex justify-between">
         <h1 className="font-bold text-2xl">User's Table</h1>
         {currentUserRole === "ADMIN" ? (
@@ -53,7 +50,7 @@ const UsersTable = ({ users }: { users: User[] }) => {
           </button>
         ) : null}
       </div>
-      <div className="relative overflow-x-auto border sm:rounded-lg mx-16 mb-16">
+      <div className="border sm:rounded-lg mx-16 mb-16">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>

@@ -4,7 +4,6 @@ import MedicalRecordsSearch from "./pages/MedicalRecordsSearch";
 import Users from "./pages/Users";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
-import Unauthorized from "./pages/Unauthorized";
 import RequireAuth from "./components/RequireAuth";
 import { Routes, Route } from "react-router-dom";
 
@@ -14,7 +13,6 @@ function App() {
       <Route path="/" element={<Layout />}>
         {/* public routes */}
         <Route path="login" element={<SignIn />} />
-        <Route path="unauthorized" element={<Unauthorized />} />
 
         {/* private routes */}
         <Route element={<RequireAuth />}>
@@ -28,7 +26,5 @@ function App() {
     </Routes>
   );
 }
-
-//return <PatientSearch />;
 
 export default App;
