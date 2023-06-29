@@ -42,6 +42,7 @@ function SignIn({ onError }: { onError: (errorMessage: string) => void }) {
         if (res.data.user) {
           sessionStorage.setItem("user", res.data.user.token);
           sessionStorage.setItem("userRole", res.data.user.role);
+          sessionStorage.setItem("userId", res.data.user.id);
           navigate("/medical-records");
         }
       })
