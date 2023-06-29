@@ -1,14 +1,26 @@
+import axios, { AxiosResponse } from "axios";
 import { useState } from "react";
 
-const AddUserForm = ({ onCancel }: { onCancel: () => void }) => {
+const AddUserForm = ({ onClose }: { onClose: () => void }) => {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("USER");
 
-  const addUser = () => {
-    console.log("email", email);
-    console.log("role", role);
-    // validate email
-    // make axios call
+  const addUser = async () => {
+    await axios
+      .post("http://localhost:5000/users/add-user", {
+        email,
+        role,
+      })
+      .then((res: AxiosResponse) => {
+        console.log("res.data", res.data);
+        if (res.data.statusCode === 200) {
+          window.location.reload();
+        }
+      })
+      .catch((error) => {
+        // If it exists, prefer to throw the error message from the medical-records server
+        throw new Error(error.response?.data?.error ?? error);
+      });
   };
 
   const addUserDisabled = email.trim() === "";
@@ -71,7 +83,7 @@ const AddUserForm = ({ onCancel }: { onCancel: () => void }) => {
           Add User
         </button>
         <button
-          onClick={onCancel}
+          onClick={onClose}
           className="bg-transparent text-gray-500 font-semibold hover:text-gray-800 hover:border-gray-800 py-2 px-4 border border-gray-500 rounded"
         >
           Cancel

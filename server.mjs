@@ -100,7 +100,6 @@ app.post("/users/get-user", async (req, res) => {
         if (response.data.user) {
           const userToken = otpGenerator.generate(12, { specialChars: false });
 
-          // TODO: set it in the cache along with their email
           return res.status(200).json({
             ...response.data,
             user: { ...response.data.user, token: userToken },
@@ -108,6 +107,41 @@ app.post("/users/get-user", async (req, res) => {
         }
 
         return res.status(404).json({ error: "User not found" });
+      })
+      .catch((error) => {
+        return res.status(500).json({ error });
+      });
+  } catch (error) {
+    return res.status(500).json({ error });
+  }
+});
+
+app.post("/users/add-user", async (req, res) => {
+  const email = req.body.email;
+  const role = req.body.role;
+
+  if (!email || !role) {
+    return res.status(400).json({ error: "Missing information" });
+  }
+
+  try {
+    const accessToken = await getAccessToken();
+
+    await axios
+      .post(
+        "http://localhost:7000/users/add-user",
+        {
+          email,
+          role,
+        },
+        {
+          headers: {
+            Authorization: `AccessToken ${accessToken}`,
+          },
+        }
+      )
+      .then((response) => {
+        return res.status(200).json(response.data);
       })
       .catch((error) => {
         return res.status(500).json({ error });

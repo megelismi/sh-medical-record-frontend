@@ -5,11 +5,13 @@ import type { User } from "../pages/Users";
 
 const UserRow = ({ user }: { user: User }) => {
   const currentUserId = sessionStorage.getItem("userId");
+  const currentUserRole = sessionStorage.getItem("userRole");
 
-  // You can not edit your own user role
-  const editDisabled = currentUserId
-    ? parseInt(currentUserId, 10) === user.id
-    : false;
+  // USERS can not edit
+  // And ADMINS can not edit their own user role
+  const editDisabled =
+    currentUserRole === "USER" ||
+    (currentUserId ? parseInt(currentUserId, 10) === user.id : false);
 
   return (
     <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
@@ -38,7 +40,7 @@ const UsersTable = ({ users }: { users: User[] }) => {
   return (
     <>
       {showAddUser ? (
-        <AddUserForm onCancel={() => setShowAddUser(false)} />
+        <AddUserForm onClose={() => setShowAddUser(false)} />
       ) : null}
       <div className="mx-20 mt-24 mb-4 flex justify-between">
         <h1 className="font-bold text-2xl">User's Table</h1>
