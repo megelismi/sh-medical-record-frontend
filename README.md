@@ -1,10 +1,12 @@
 # SimpleHealth Medical Records Frontend
 
 ## Table of Contents
-1. [About the app](#example)
-2. [Screenshots](#example2)
-3. [Technologies](#third-example)
-4. [Setup](#fourth-examplehttpwwwfourthexamplecom)
+1. [About the app](https://github.com/megelismi/sh-medical-record-frontend/blob/main/README.md#about-the-app)
+2. [Screenshots](https://github.com/megelismi/sh-medical-record-frontend/blob/main/README.md#screenshots)
+3. [Technologies](https://github.com/megelismi/sh-medical-record-frontend/blob/main/README.md#technologies)
+4. [Setup](https://github.com/megelismi/sh-medical-record-frontend/blob/main/README.md#setup)
+5. [Available Scripts](https://github.com/megelismi/sh-medical-record-frontend/blob/main/README.md#available-scripts)
+6. [Credits](https://github.com/megelismi/sh-medical-record-frontend/blob/main/README.md#credits)
 
 
 ## About the app
