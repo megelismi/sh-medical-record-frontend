@@ -3,30 +3,10 @@ import AddUserModal from "./AddUserModal";
 import type { User } from "../pages/Users";
 
 const UserRow = ({ user }: { user: User }) => {
-  const currentUserId = sessionStorage.getItem("userId");
-  const currentUserRole = sessionStorage.getItem("userRole");
-
-  // USERS can not edit
-  // And ADMINS can not edit their own user role
-  const editDisabled =
-    currentUserRole === "USER" ||
-    (currentUserId ? parseInt(currentUserId, 10) === user.id : false);
-
   return (
     <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
       <td className="px-6 py-4">{user.email}</td>
       <td className="px-6 py-4">{user.role}</td>
-      <td className="px-6 py-4">
-        <button
-          disabled={editDisabled}
-          className={`${
-            editDisabled ? "opacity-50 cursor-not-allowed" : ""
-          } text-blue-600`}
-          onClick={() => console.log(`edit user ${user.id}`)}
-        >
-          Edit
-        </button>
-      </td>
     </tr>
   );
 };
@@ -59,9 +39,6 @@ const UsersTable = ({ users }: { users: User[] }) => {
               </th>
               <th scope="col" className="px-6 py-3">
                 Role
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Action
               </th>
             </tr>
           </thead>

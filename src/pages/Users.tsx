@@ -19,7 +19,6 @@ const Users = () => {
           url: "http://localhost:5000/users/get-all",
         })
         .then((response: AxiosResponse) => {
-          console.log("response.data", response.data);
           setUsers(response.data.users);
         })
         .catch(function (error) {
