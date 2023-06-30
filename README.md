@@ -75,7 +75,7 @@ This application uses
     * `REACT_APP_GOOGLE_OAUTH_CLIENT_SECRET`: client id for [Google Oauth](https://www.youtube.com/watch?v=roxC8SMs7HU)
  * Run `npm start`
  * In development, go to `localhost:3000/login`. You'll be prompted to login in using a gmail account. You must have a user account to access the application. In development, you can do this by simply adding your user account to the database connected to the [Medical Records API](https://github.com/megelismi/sh-medical-record-api). Once this application is deployed in production, another admin can add your email on the `/users` page  and that will create your user's account. 
- * As long as the Medical Records API is running and the database is running (and hydrated), you should be able to search for SimpleHealth patient's medical records using their email and date of birth. If you are in development, the database has been seeded with one user: Alice Liddel. Her email is alice@gmail.com and date of birth is `09/30/1988`. 
+ * As long as the Medical Records API is running and the database is running (and hydrated), you should be able to search for SimpleHealth patient's medical records using their email and date of birth. If you are in development, the database has been seeded with one user: Alice Liddel. Her email is alice@gmail.com and date of birth is `01/12/1992`. 
 
 ## Available Scripts
 
