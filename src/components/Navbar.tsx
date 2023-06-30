@@ -4,8 +4,6 @@ import useLogout from "../hooks/useLogout";
 import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
-  const [active, setActive] = useState("medical-records");
-
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -40,7 +38,6 @@ const Navbar = () => {
             <li>
               <NavLink
                 to="/medical-records"
-                onClick={() => setActive("medical-records")}
                 className={({ isActive }) =>
                   `${
                     isActive ? "text-violet-700" : "text-gray-900"

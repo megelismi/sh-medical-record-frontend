@@ -20,7 +20,7 @@ const UsersTable = ({ users }: { users: User[] }) => {
     <>
       <AddUserModal show={showAddUser} onClose={() => setShowAddUser(false)} />
       <div className="mx-20 mt-24 mb-4 flex justify-between">
-        <h1 className="font-bold text-2xl">User's Table</h1>
+        <h1 className="font-bold text-2xl">Users</h1>
         {currentUserRole === "ADMIN" ? (
           <button
             onClick={() => setShowAddUser(true)}
