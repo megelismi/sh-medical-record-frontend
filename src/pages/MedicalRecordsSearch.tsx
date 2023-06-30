@@ -1,3 +1,11 @@
 import MedicalRecordsSearch from "../components/medicalRecords";
+import Navbar from "../components/Navbar";
 
-export default MedicalRecordsSearch;
+const MedicalRecordsSearchPage = () => (
+  <>
+    <Navbar />
+    <MedicalRecordsSearch />
+  </>
+);
+
+export default MedicalRecordsSearchPage;

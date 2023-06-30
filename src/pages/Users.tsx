@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
 import UsersTable from "../components/UsersTable";
 import axios, { AxiosResponse } from "axios";
 
@@ -30,9 +31,10 @@ const Users = () => {
   }, []);
 
   return (
-    <div>
+    <>
+      <Navbar />
       <UsersTable users={users} />
-    </div>
+    </>
   );
 };
 
