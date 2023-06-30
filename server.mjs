@@ -5,11 +5,16 @@ import dotenv from "dotenv";
 import axios from "axios";
 import cors from "cors";
 import otpGenerator from "otp-generator";
+import NodeCache from "node-cache";
 
 // Defining the server port
 const port = 5000;
 
 const app = express();
+
+// Create a server side cache
+// time to expire is infinity, and check period is 24 hours
+const cache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -96,9 +101,13 @@ app.post("/users/get-user", async (req, res) => {
           },
         }
       )
-      .then((response) => {
+      .then(async (response) => {
         if (response.data.user) {
           const userToken = otpGenerator.generate(12, { specialChars: false });
+
+          // Save the user data in the node-cache for 24 hours
+          await cache.set("loggedInUserToken", userToken, 86400);
+          await cache.set("loggedInUserRole", response.data.user.role, 86400);
 
           return res.status(200).json({
             ...response.data,
@@ -116,12 +125,34 @@ app.post("/users/get-user", async (req, res) => {
   }
 });
 
+app.post("/users/verify-user", async (req, res) => {
+  const userToken = req.body.userToken;
+
+  const loggedInUserToken = cache.get("loggedInUserToken");
+
+  if (loggedInUserToken !== userToken) {
+    return res
+      .status(401)
+      .json({ statusCode: 401, status: "error", error: "Unauthorized" });
+  }
+
+  return res.status(200).json({ statusCode: 200, status: "success" });
+});
+
 app.post("/users/add-user", async (req, res) => {
   const email = req.body.email;
   const role = req.body.role;
 
   if (!email || !role) {
     return res.status(400).json({ error: "Missing information" });
+  }
+
+  const loggedInUserRole = cache.get("loggedInUserRole");
+
+  if (loggedInUserRole !== "ADMIN") {
+    return res
+      .status(401)
+      .json({ error: "Must be an admin to create a user!" });
   }
 
   try {

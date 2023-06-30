@@ -38,7 +38,35 @@ const AddUserForm = ({ onClose }: { onClose: () => void }) => {
   const [role, setRole] = useState("USER");
   const [error, setError] = useState<string | null>(null);
 
+  const verifyUser = async (): Promise<boolean> => {
+    let userIsVerified = false;
+    const userToken = sessionStorage.getItem("user");
+
+    await axios
+      .post("http://localhost:5000/users/verify-user", {
+        userToken,
+      })
+      .then((res: AxiosResponse) => {
+        if (res.data.statusCode === 200) {
+          userIsVerified = true;
+        }
+      })
+      .catch((error) => {
+        userIsVerified = false;
+      });
+
+    return userIsVerified;
+  };
+
   const addUser = async () => {
+    const userIsVerified = await verifyUser();
+
+    if (!userIsVerified) {
+      setError("Your user credentials have expired. Log out and log back in.");
+
+      return;
+    }
+
     await axios
       .post("http://localhost:5000/users/add-user", {
         email,

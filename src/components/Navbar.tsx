@@ -1,4 +1,3 @@
-import { useState } from "react";
 import SH_S from "../images/SH_S.png";
 import useLogout from "../hooks/useLogout";
 import { NavLink } from "react-router-dom";

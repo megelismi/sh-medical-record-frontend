@@ -17,6 +17,26 @@ const MedicalRecordsSearch = () => {
   const [medicalRecords, setMedicalRecords] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
+  const verifyUser = async (): Promise<boolean> => {
+    let userIsVerified = false;
+    const userToken = sessionStorage.getItem("user");
+
+    await axios
+      .post("http://localhost:5000/users/verify-user", {
+        userToken,
+      })
+      .then((res: AxiosResponse) => {
+        if (res.data.statusCode === 200) {
+          userIsVerified = true;
+        }
+      })
+      .catch((error) => {
+        userIsVerified = false;
+      });
+
+    return userIsVerified;
+  };
+
   const getAccessToken = async () => {
     tokenTries++;
 
@@ -49,6 +69,15 @@ const MedicalRecordsSearch = () => {
   };
 
   const getMedicalRecords = async () => {
+    // Verify the user's credentials before making a request for medical records
+    const userIsVerified = await verifyUser();
+
+    if (!userIsVerified) {
+      throw new Error(
+        "Your user credentials have expired. Log out and log back in."
+      );
+    }
+
     let patientMedicalRecords = null;
 
     const token = await getAccessToken();
