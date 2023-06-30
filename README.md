@@ -55,6 +55,8 @@ The SimpleHealth Medical Records application allows us to retrieve the medical h
 
 This application uses 
  * `React`
+ * `Typescript`
+ * `eslint`
  * `axios`
  * `Google Oauth`
  * `Node.js`
