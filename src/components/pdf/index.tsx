@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
   },
 });
 
+// TODO: move these types to the types.ts file
 interface Patient {
   firstName: string;
   lastName: string;

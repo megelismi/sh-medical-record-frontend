@@ -11,12 +11,16 @@ let tokenTries = 0;
 const MedicalRecordsSearch = () => {
   const [email, setEmail] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
-  // SEARCH, SEARCH_SUCCESS, SEARCH_ERROR
-  const [mode, setMode] = useState("SEARCH");
+  const [mode, setMode] = useState<
+    "SEARCH" | "SEARCH_SUCCESS" | "SEARCH_ERROR"
+  >("SEARCH");
   const [loading, setLoading] = useState(false);
   const [medicalRecords, setMedicalRecords] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Before we grab the patient's medical records,
+  // we need to verify that the logged in user's credentials
+  // are valid (i.e.; have not been tampered with and have not expired)
   const verifyUser = async (): Promise<boolean> => {
     let userIsVerified = false;
     const userToken = sessionStorage.getItem("user");
@@ -50,7 +54,7 @@ const MedicalRecordsSearch = () => {
       return storedAccessToken;
     }
 
-    // Grab the access token from the server
+    // Grab the access token from the local server
     // We're doing it this way, so that our client id and client secret
     // is not exposed to the browser
     await axios
@@ -119,19 +123,20 @@ const MedicalRecordsSearch = () => {
     return patientMedicalRecords;
   };
 
-  const generatePDFDownloadLink = async () => {
+  const handleGetMedicalRecordsClick = async () => {
     try {
       const medicalRecords = await getMedicalRecords();
 
       if (medicalRecords) {
+        // Setting the mode to SEARCH_SUCCESS and
+        // setting medical records in the state will trigger
+        // a success screen that will show a PDF download link
         setMode("SEARCH_SUCCESS");
 
         setMedicalRecords(medicalRecords);
       } else {
         throw new Error("Records not found.");
       }
-
-      // @ts-ignore
     } catch (error) {
       setMode("SEARCH_ERROR");
       setLoading(false);
@@ -193,7 +198,7 @@ const MedicalRecordsSearch = () => {
                   className="appearance-none block w-full text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                   id="grid-dob"
                   type="date"
-                  placeholder="09/30/1993"
+                  placeholder="09/02/1993"
                   onChange={(e) => setDateOfBirth(e.currentTarget.value)}
                 />
               </div>
@@ -227,7 +232,7 @@ const MedicalRecordsSearch = () => {
                 ) : (
                   <button
                     disabled={disabled}
-                    onClick={generatePDFDownloadLink}
+                    onClick={handleGetMedicalRecordsClick}
                     className={`bg-violet-500 text-white font-bold py-2 px-4 rounded w-full ${
                       disabled
                         ? "opacity-50 cursor-not-allowed"
@@ -245,7 +250,6 @@ const MedicalRecordsSearch = () => {
         <SearchSuccess
           medicalRecords={medicalRecords}
           onBack={() => {
-            // TODO: Hit some reset mode where we refresh everything
             setMode("SEARCH");
           }}
         />
@@ -253,7 +257,6 @@ const MedicalRecordsSearch = () => {
         <SearchError
           errorMessage={errorMessage}
           onBack={() => {
-            // TODO: Hit some reset mode where we refresh everything
             setMode("SEARCH");
           }}
         />

@@ -59,6 +59,9 @@ function SignIn({ onError }: { onError: (errorMessage: string) => void }) {
   useEffect(() => {
     /* global google */
     // @ts-ignore - google defined in public/index.html
+    // NOTE: this will occasionally thrown an error still when you
+    // refresh the sign in page. If it becomes a pain, replace with
+    // a better method...
     google.accounts.id.initialize({
       client_id: process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID,
       callback: handleGoogleCallbackResponse,

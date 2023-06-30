@@ -129,6 +129,8 @@ const Consultation = ({ consultation }: { consultation: ConsultationType }) => {
   );
 };
 
+// NOTE: We can not use Tailwind for styling like we do in the rest of the application
+// We have to define our own styles for the React PDF library
 const styles = StyleSheet.create({
   consultation: {
     fontFamily: "Red Hat Mono",
