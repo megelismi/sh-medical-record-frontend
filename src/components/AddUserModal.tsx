@@ -13,7 +13,7 @@ const AddUserModal = ({
   return (
     <Modal show={show} onClose={onClose}>
       <h3 className="text-xl font-semibold text-gray-900 py-4 px-8">
-        Add User Form
+        Add User
       </h3>
       <AddUserForm onClose={onClose} />
     </Modal>
