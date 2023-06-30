@@ -17,7 +17,7 @@ The SimpleHealth Medical Records application allows us to retrieve the medical h
 
 ### The Medical Records Search Page 
 
-![This is a screenshot of the Medical Records Search page](src/images/ScreenshotMedicalRecordsSearch.png "Medical Records Search page")
+![This is a screenshot of the Medical Records Search page](src/images/MedicalRecordsSearchScreenshot.png "Medical Records Search page")
 
 ### Medical Records Search Success
 
