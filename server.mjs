@@ -13,7 +13,9 @@ const port = 5000;
 const app = express();
 
 // Create a server side cache
-// time to expire is infinity, and check period is 24 hours
+// Time to expire is infinity
+// NOTE: In development, the cache will reset if you ever
+// make changes to this server file
 const cache = new NodeCache({ stdTTL: 0, checkperiod: 0 });
 
 app.use(cors());
@@ -27,6 +29,9 @@ dotenv.config();
 app.listen(5000, () => console.log(`Backend server is running on ${port}`));
 
 // Helper functions
+
+// This uses the client id and client secret to grab an access token
+// for the medical records api
 async function getAccessToken() {
   const accessToken = await axios
     .post("http://localhost:7000/access-token", {
@@ -54,6 +59,7 @@ app.get("/access-token", async (req, res) => {
   }
 });
 
+// Gets all the authorized users for the application
 app.get("/users/get-all", async (req, res) => {
   const accessToken = await getAccessToken();
 
@@ -79,6 +85,8 @@ app.get("/users/get-all", async (req, res) => {
   }
 });
 
+// Verifies that the given email corresponds to a user
+// of this application
 app.post("/users/get-user", async (req, res) => {
   const email = req.body.email;
 
@@ -106,6 +114,10 @@ app.post("/users/get-user", async (req, res) => {
           const userToken = otpGenerator.generate(12, { specialChars: false });
 
           // Save the user data in the node-cache for 24 hours
+          // We save it on the server side so that we can verify the user
+          // token when certain requests are made. The user token is saved
+          // in Session Storage on the frontend, so we always want to ensure
+          // that it wasn't tampered with.
           await cache.set("loggedInUserToken", userToken, 86400);
           await cache.set("loggedInUserRole", response.data.user.role, 86400);
 
@@ -125,6 +137,8 @@ app.post("/users/get-user", async (req, res) => {
   }
 });
 
+// This route makes sure that the user token passed in from
+// frontend matches the cached version on the server
 app.post("/users/verify-user", async (req, res) => {
   const userToken = req.body.userToken;
 
@@ -139,6 +153,7 @@ app.post("/users/verify-user", async (req, res) => {
   return res.status(200).json({ statusCode: 200, status: "success" });
 });
 
+// Allows admins of this application to add new users
 app.post("/users/add-user", async (req, res) => {
   const email = req.body.email;
   const role = req.body.role;
