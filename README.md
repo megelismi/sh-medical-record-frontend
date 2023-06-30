@@ -15,7 +15,41 @@ The SimpleHealth Medical Records application allows us to retrieve the medical h
 
 ## Screenshots
 
+### The Medical Records Search Page 
+
 ![This is a screenshot of the Medical Records Search page](src/images/ScreenshotMedicalRecordsSearch.png "Medical Records Search page")
+
+### Medical Records Search Success
+
+![Medical Records Search Success screenshot](src/images/MedicalRecordsSearchSuccessScreenshot.png "Medical Records Search Success screenshot")
+
+### Medical Records Search Error - Patient Not Found
+
+![Medical Records Search Error - Patient Not Found screenshot](src/images/MedicalRecordsErrorPatientNotFoundScreenshot.png "Medical Records Search Error - Patient Not Found")
+
+### Medical Records Search Error - Client Credentials Not Valid
+
+![Medical Records Search Error - Client Credentials Not Valid screenshot](src/images/MedicalRecordsErrorClientCredentialsScreenshot.png "Medical Records Search Error - Client Credentials Not Valid")
+
+### PDF - Prescription Record
+
+![PDF - Prescription Record screenshot](src/images/PrescriptionPDFScreenshot.png "PDF - Prescription Record")
+
+### PDF - Consultation Record
+
+![PDF - Consultation Record screenshot](src/images/ConsultationPDFScreenshot.png "PDF - Consultation Record")
+
+### Users Page
+#### Note: Only ADMINS will see the "Add New User" button
+
+![Users Page screenshot](src/images/UsersPageScreenshot.png "Users Page")
+
+
+### Add User Form
+
+![Add User Form screenshot](src/images/AddUserScreenshot.png "Add User Form")
+
+
 
 ## Technologies
 
