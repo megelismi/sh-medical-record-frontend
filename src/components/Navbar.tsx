@@ -39,7 +39,7 @@ const Navbar = () => {
                 to="/medical-records"
                 className={({ isActive }) =>
                   `${
-                    isActive ? "text-violet-700" : "text-gray-900"
+                    isActive ? "text-violet-700" : "text-gray-900 dark:text-white md:dark:hover:text-violet-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                   } block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-violet-700 md:p-0`
                 }
               >
@@ -51,7 +51,7 @@ const Navbar = () => {
                 to="/users"
                 className={({ isActive }) =>
                   `${
-                    isActive ? "text-violet-700" : "text-gray-900"
+                    isActive ? "text-violet-700" : "text-gray-900 dark:text-white md:dark:hover:text-violet-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                   } block py-2 pl-3 pr-4 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-violet-700 md:p-0`
                 }
               >

@@ -10,7 +10,7 @@ function App() {
   const user = sessionStorage.getItem("user");
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      {/* <Route path="/" element={<Layout />}> */}
         {/* public routes */}
         <Route path="login" element={<SignIn />} />
 
@@ -27,7 +27,7 @@ function App() {
             user ? <Navigate to="/medical-records" /> : <Navigate to="/login" />
           }
         />
-      </Route>
+      {/* </Route> */}
     </Routes>
   );
 }
